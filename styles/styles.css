@@ -68,6 +68,13 @@ table {
     grid-gap: 0.6rem;
 }
 
+.grid > * {
+    border: 0.1rem solid rgb(0,95,107);
+    border-radius: 0.2rem;
+    /*font-weight: bold;*/
+    padding: 0.6rem;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -110,16 +117,52 @@ main {
     "chat"
     "chatInput"
     ;
+    min-height: 0;
     grid-gap: 0.6rem;
 }
 .chat {
+    border: 0.1rem solid rgb(0,95,107);
+    min-height: 0;
+    overflow-y: scroll;
     grid-area: chat;
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-row-gap: 0.6rem;
+    padding: 0.4rem;
 }
+
+.chatMessageWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "other my"
+    ;
+    grid-gap: 3.5rem;
+}
+
+.chatMessage {
+    border: 0.1rem solid rgb(0,95,107);
+    border-radius: 0.7rem;
+    padding: 0.4rem 0.3rem;
+    text-align: center;
+}
+
+
+.otherMessage{
+    grid-area: other;
+}
+
+
+.myMessage{
+    grid-area: my;
+}
+
+
+
 
 .chatInput {
     border: 0.1rem solid rgb(0,95,107);
     border-radius: 0.2rem;
-
     width: 100%;
     grid-area: chatInput;
     display: grid;
@@ -154,11 +197,4 @@ aside {
 
 footer {
     grid-area: foot;
-}
-
-.grid > * {
-    border: 0.1rem solid rgb(0,95,107);
-    border-radius: 0.2rem;
-    /*font-weight: bold;*/
-    padding: 0.6rem;
 }
