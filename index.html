@@ -2,26 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Project Manager</title>
+    <title>Project: Efficiency</title>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <div class="grid">
         <header>
-            <div class="pageTitle"><a href="index.html"> Project Manager</a></div>
-            <div class="buttons">
-                <a href="login.html" class="login">Log In</a>
-                <a href="register.html" class="login">Register</a>
-            </div>
+            <div class="pageTitle"><a href="index.html">Project: Efficiency</a></div>
+            <span class="divider"></span>
+            <div class="links">
+                <a href="login.html" class="link">Log In</a>
+                <a href="register.html" class="link">Register</a>
+        `    </div>
         </header>
         <nav>PROJECTS</nav>
         <main>
-            <div id="chat" class="chat">
+            <div class="chatWrapper">
+                <div id="chat" class="chat"></div>
             </div>
 
             <div class="chatInput">
-                <textarea class="message"></textarea>
-                <button type="button" class="submitMessage" onclick="test()">Send</button>
+                <textarea class="inputMessage"></textarea>
+                <span class="beforeSubmit"></span>
+                <button type="button" id="submitMessage" class="submitMessage" onclick="test()">Send</button>
+                <span class="afterSubmit"></span>
             </div>
         </main>
         <aside>FILES</aside>
