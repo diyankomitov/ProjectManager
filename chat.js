@@ -1,8 +1,13 @@
 // This is the client-side script.
-function test() {
+function test(passedMessageBody) {
        // Initialize the HTTP request.
        var xhr = new XMLHttpRequest();
-       xhr.open('get', 'chat.php');
+       var phpPage = 'chat_sendMessage.php';
+       var projectId = 'project=1';
+       var userId = 'user=2';
+       var messageBody = 'messageBody=' + passedMessageBody;
+       var date = 'date=date' //TODO: figure out dates. Right now date columns can be null in database.
+       xhr.open('get', phpPage +'?' + projectId + '&' + userId + '&' + messageBody + '&' + date);
 
        // Track the state changes of the request.
        xhr.onreadystatechange = function () {
