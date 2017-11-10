@@ -185,16 +185,14 @@ main {
     color: white;
     border: 0.1rem rgb(0,95,107);
     border-radius: 0.7rem;
-    padding: 0.4rem 0.3rem;
-    text-align: center;
+    padding: 0.4rem 0.6rem;
+    text-align: start;
 }
-
 
 .otherMessage{
     background-color: #FFBD70;
     grid-area: other;
 }
-
 
 .myMessage{
     background-color: var(--main-color);
