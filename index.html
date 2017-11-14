@@ -17,13 +17,16 @@
         <nav>PROJECTS</nav>
         <main>
             <div id="chat" class="chat">
+                There are no messages.
             </div>
 
             <div class="chatInput">
                 <textarea id="textArea" class="message"></textarea>
                 <button type="button" class="submitMessage"
-                        onclick="chat_sendMessage(document.getElementById('textArea').value); chat_retrieveMessages();"
-                >Send</button>
+                        onclick="chat_sendMessage(document.getElementById('textArea').value);">
+                    Send
+                </button>
+                <button type="button" onclick="chat_refreshChat();">Refresh</button>
             </div>
         </main>
         <aside>FILES</aside>

@@ -1,4 +1,11 @@
-// This is the client-side script.
+
+
+function chat_refreshChat(){
+    chat_retrieveMessages();
+}
+
+
+
 function chat_sendMessage(passedMessageBody) {
 
     if(passedMessageBody.trim() !== "") {
@@ -41,7 +48,7 @@ function chat_retrieveMessages() {
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
-                document.getElementById("chat").innerHTML += xhr.responseText; // 'This is the returned text.'
+                document.getElementById("chat").innerHTML = xhr.responseText; // 'This is the returned text.'
             } else {
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }
