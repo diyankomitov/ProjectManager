@@ -1,0 +1,61 @@
+
+#The following is to be used in the event that all tables are somehow dropped -Ewan
+
+CREATE TABLE `cs312_h`.`Message` (
+  `id` int(11) NOT NULL,
+  `creator_id` int(11) NOT NULL,
+  `message_body` varchar(5000) NOT NULL,
+  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER  TABLE `cs312_h`.`Message` ADD PRIMARY KEY (`id`);
+ALTER  TABLE `cs312_h`.`Message` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+
+CREATE TABLE `cs312_h`.`Project` (
+  `id` int(11) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_complete` tinyint(1) NOT NULL,
+  `deadline` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER  TABLE `cs312_h`.`Project` ADD PRIMARY KEY (`id`);
+ALTER  TABLE `cs312_h`.`Project` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+
+CREATE TABLE `cs312_h`.`ReceivedMessage` (
+  `id` int(11) NOT NULL,
+  `recipient_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `message_id` int(11) NOT NULL,
+  `is_read` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER  TABLE `cs312_h`.`ReceivedMessage` ADD PRIMARY KEY (`id`);
+ALTER  TABLE `cs312_h`.`ReceivedMessage` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+
+CREATE TABLE `cs312_h`.`User` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `pass` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `uni` varchar(255) DEFAULT NULL,
+  `course` varchar(255) DEFAULT NULL,
+  `profile_pic_path` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER  TABLE `cs312_h`.`User` ADD PRIMARY KEY (`id`);
+ALTER  TABLE `cs312_h`.`User` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+
+CREATE TABLE `cs312_h`.`UserProject` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER  TABLE `cs312_h`.`UserProject` ADD PRIMARY KEY (`id`);
+ALTER  TABLE `cs312_h`.`UserProject` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
