@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by IntelliJ IDEA.
- * User: E
+ * User: Ewan
  * Date: 09/11/2017
  * Time: 18:52
  */
@@ -13,20 +13,10 @@ $conn = connectToDatabase();
 $projectId = $_GET["project"];
 $userId = $_GET["user"];
 $messageBody = $_GET["messageBody"];
-$date = $_GET["date"];
 
 $newMessageId = getNewMessageId($conn);
-createMessageEntry($conn, $newMessageId, $userId, $messageBody, $date);
+createMessageEntry($conn, $newMessageId, $userId, $messageBody);
 createReceivedMessageEntries($conn, $userId, $newMessageId, $projectId);
-
-// Set the content type.
-header('Content-Type: text/');
-
-echo "<div class='chatMessageWrapper'>
-          <div class='chatMessage otherMessage'>
-              <p> $newMessageId - $projectId - $userId - $messageBody</p>
-          </div>
-      </div> ";
 
 //=============================================//
 //              Functions below                //
@@ -53,9 +43,9 @@ function getNewMessageId($conn){
     return $newMessageId;
 }
 
-function createMessageEntry($conn, $newMessageId, $userId, $messageBody, $date){
-    $conn->query("INSERT INTO `Message` (`id`, `creator_id`, `message_body`, `create_date`) 
-                  VALUES ('$newMessageId', '$userId', '$messageBody', NULL);");
+function createMessageEntry($conn, $newMessageId, $userId, $messageBody){
+    $conn->query("INSERT INTO `Message` (`id`, `creator_id`, `message_body`) 
+                  VALUES ('$newMessageId', '$userId', '$messageBody');");
     if($conn->error){
         echo $conn->error;
     }

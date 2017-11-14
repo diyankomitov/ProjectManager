@@ -20,8 +20,8 @@
             </div>
 
             <div class="chatInput">
-                <textarea class="message"></textarea>
-                <button type="button" class="submitMessage" onclick="test('messageBody')">Send</button>
+                <textarea id="textArea" class="message"></textarea>
+                <button type="button" class="submitMessage" onclick="chat_sendMessage(document.getElementById('textArea').value)">Send</button>
             </div>
         </main>
         <aside>FILES</aside>
