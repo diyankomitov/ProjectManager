@@ -15,7 +15,7 @@ $userId = $_GET["user"];
 $messageBody = $_GET["messageBody"];
 
 $newMessageId = getNewMessageId($conn);
-createMessageEntry($conn, $newMessageId, $userId, $messageBody);
+createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageBody);
 createReceivedMessageEntries($conn, $userId, $newMessageId, $projectId);
 
 //=============================================//
@@ -24,29 +24,23 @@ createReceivedMessageEntries($conn, $userId, $newMessageId, $projectId);
 
 function getNewMessageId($conn){
 
-    $newMessageId = -1;
-
     //Find the max id in messages. The new id is the max plus one.
+    $newMessageId = 1;
     $result = $conn->query("SELECT max(`id`) FROM `Message`");
-    if($result->num_rows  === 1) {
-
+    if($result->num_rows  > 0) {
         $newMessageId = $result->fetch_array()[0] + 1;
-
-        //If there are no rows, set it to 1. //FIXME: I dont know why this works.
-        if($newMessageId < 0 || $newMessageId == ""){
-            $newMessageId = 1;
-        }
-    } else {
+    } else if($conn->error) {
         echo $conn->error;
     }
 
     return $newMessageId;
 }
 
-function createMessageEntry($conn, $newMessageId, $userId, $messageBody){
-    $conn->query("INSERT INTO `Message` (`id`, `creator_id`, `message_body`) 
-                  VALUES ('$newMessageId', '$userId', '$messageBody');");
-    if($conn->error){
+function createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageBody){
+    if(
+        $conn->query("INSERT INTO `Message` (`id`, `creator_id`, `project_id`, `message_body`) 
+                VALUES ('$newMessageId', '$userId', '$projectId', '$messageBody');")
+        === FALSE) {
         echo $conn->error;
     }
 }
