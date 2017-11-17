@@ -13,21 +13,18 @@ class Message {
     var $messageBody;
     var $createDate;
 
-    public function __construct($id, $creatorId, $messageBody, $createDateString)
-    {
+    public function __construct($id, $creatorId, $messageBody, $createDateString){
         $this->id = $id;
         $this->creatorId = $creatorId;
-        $this->messageBody = $messageBody;
+        $this->messageBody = htmlspecialchars($messageBody);
         $this->createDate = $this->dateStringToDate($createDateString);
     }
 
-    private function dateStringToDate($createDateString)
-    {
+    private function dateStringToDate($createDateString){
 
     }
 
-    public function buildHTMLMessage($userId)
-    {
+    public function buildHTMLMessage($userId){
         $class = $this->creatorId === $userId ? "chatMessage myMessage" : "chatMessage otherMessage";
         $string = "
                     <div class='chatMessageWrapper'>
@@ -39,23 +36,19 @@ class Message {
         return $string;
     }
 
-    public function getId()
-    {
+    public function getId(){
         return $this->id;
     }
 
-    public function getCreatorId()
-    {
+    public function getCreatorId(){
         return $this->creatorId;
     }
 
-    public function getMessageBody()
-    {
+    public function getMessageBody(){
         return $this->messageBody;
     }
 
-    public function getCreateDate()
-    {
+    public function getCreateDate(){
         return $this->createDate;
     }
 }

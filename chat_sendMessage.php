@@ -10,9 +10,9 @@
 require_once "databaseConn.php";
 $conn = connectToDatabase();
 
-$projectId = $_GET["project"];
-$userId = $_GET["user"];
-$messageBody = $_GET["messageBody"];
+$projectId = $conn->real_escape_string($_GET["project"]);
+$userId = $conn->real_escape_string($_GET["user"]);
+$messageBody = $conn->real_escape_string($_GET["messageBody"]);
 
 $newMessageId = getNewMessageId($conn);
 createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageBody);
