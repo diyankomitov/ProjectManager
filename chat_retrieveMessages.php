@@ -22,7 +22,7 @@ $dateFrom = $_GET["dateFrom"];
 $dateUpTo = $_GET["dateUpTo"];
 
 
-$messages = getMessages($conn, $projectId);
+$messages = getMessages($conn, $projectId, $dateFrom, $dateUpTo);
 $returnString = buildReturnString($messages, $userId);
 
 
@@ -32,10 +32,14 @@ echo $returnString;
 //              Functions below                //
 //=============================================//
 
-function getMessages($conn, $projectId){
+function getMessages($conn, $projectId, $from, $upTo){
     $messages = [];
 
-    $result = $conn->query("SELECT `id`, `creator_id`, `message_body`, `create_date` FROM `Message` WHERE `project_id` = $projectId");
+    $result = $conn->query("SELECT `id`, `creator_id`, `message_body`, `create_date` 
+                            FROM `Message` 
+                            WHERE `project_id` = $projectId
+                            /* AND `create_date` > $from */
+                            /* AND `create_date` < $upTo */");
     if($result === FALSE){
         echo "CONN ERROR: " . $conn->error;
     } else {
