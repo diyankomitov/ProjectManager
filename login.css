@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:700i');
+
+/***********************************************/
+/*                  CSS RESET                  */
+/***********************************************/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, main {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/***********************************************/
+/*                END CSS RESET                */
+/***********************************************/
+* {
+    box-sizing: border-box;
+}
+
+.grid {
+    display: grid;
+    height: 100vh;
+    padding: 1vh;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+            "head head head head head head head head"
+            ".... .... main main main main .... ...."
+            "foot foot foot foot foot foot foot foot"
+;
+    grid-gap: 0.6rem;
+}
+
+main {
+    font-size: 1.5rem;
+    grid-area: main;
+    align-self: center;
+    justify-self: center;
+}
+
+main form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+            "label1 input1"
+            "label2 input2"
+            "...... input3"
+;
+    grid-gap: 0.6rem;
+}
+
+main #userLabel {
+    grid-area: label1;
+}
+main #passLabel {
+    grid-area: label2;
+}
+main #username {
+    grid-area: input1;
+}
+main #password {
+    grid-area: input2;
+}
+main #submit {
+    grid-area: input3;
+}
+

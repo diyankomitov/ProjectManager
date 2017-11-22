@@ -2,6 +2,12 @@
 
 <?php
 
+session_start();
+
+if( isset($_SESSION['email'])!="" ){
+    header("Location: index.html");
+}
+
 include_once 'databaseConn.php';
 $conn = connectToDatabase();
 

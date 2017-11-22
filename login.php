@@ -1,6 +1,7 @@
 
 
 <?php
+session_start();
 
 include_once 'databaseConn.php';
 $conn = connectToDatabase();
@@ -47,6 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $rows = mysqli_num_rows($result);
 
         if ($rows == 1){
+            $_SESSION['email'] = $email;
             $successful = "Login successful";
         }
         else{
@@ -92,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>  $passError </p>";
 
         if($successful != "")
-                {echo "$successful.<a href=\"index.html\"><u>Return to home</u></a>";}
+                {echo "$successful.<a href=\"index.php\"><u>Return to home</u></a>";}
         if($notSuccessful != "")
             {echo $notSuccessful;}
         ?>

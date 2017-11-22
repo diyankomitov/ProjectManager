@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: E
- * Date: 09/11/2017
- * Time: 18:56
- */
+
 
 function connectToDatabase(){
     $host = "devweb2017.cis.strath.ac.uk";
