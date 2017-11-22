@@ -81,13 +81,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
             <label id="firstLabel" for="name">Full Name</label>
-            <input type="text" id="name" name="name">
+            <input type="text" id="name" name="name" value="<?php echo $name; ?>">
             <label id="dobLabel" for="dob">Date of Birth</label>
             <input type="date" id="dob" name="dob">
             <label id="userLabel" for="Email">Email Address</label>
-            <input type="text" id="Email" name="email">
+            <input type="text" id="Email" name="email" value="<?php echo $email; ?>">
             <label id="passLabel" for="password">Password</label>
-            <input type="password" id="password" name="pass">
+            <input type="password" id="password" name="pass" value="<?php echo $pass; ?>">
             <input id="submit" type="submit" value="Register">
         </form>
         <?php
