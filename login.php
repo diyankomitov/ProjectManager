@@ -94,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>  $passError </p>";
 
         if($successful != "")
-                {echo "$successful.<a href=\"index.php\"><u>Return to home</u></a>";}
+                {header("Location: index.php");}
         if($notSuccessful != "")
             {echo $notSuccessful;}
         ?>
