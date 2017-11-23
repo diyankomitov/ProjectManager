@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <div class="grid">
     <header>
-        <div class="pageTitle"><a href="index.html"> Project Manager</a></div>
+        <div class="pageTitle"><a href="index.php"> Project Manager</a></div>
     </header>
     <main>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">

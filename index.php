@@ -32,7 +32,7 @@ $setName = $row['name'];
 <body>
 <div class="grid">
     <header>
-        <div class="pageTitle"><a href="index.html"> Project Manager</a></div>
+        <div class="pageTitle"><a href="index.php"> Project Manager</a></div>
         Welcome back <?php echo $setName ?>!
         <div class="buttons">
             <a href="logout.php" class="logout">Log Out</a>
@@ -82,7 +82,7 @@ else{
 <body>
 <div class="grid">
     <header>
-        <div class="pageTitle"><a href="index.html"> Project Manager</a></div>
+        <div class="pageTitle"><a href="index.php"> Project Manager</a></div>
         <div class="buttons">
             <a href="login.php" class="login">Log In</a>
             <a href="register.php" class="login">Register</a>
