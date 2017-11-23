@@ -12,8 +12,8 @@ if( isset($_SESSION['email'])!="") {
 
 
 
-$try = $_SESSION['email'];
-$sql = "SELECT `name` FROM `User` WHERE `email` = '$try'";
+$setEmail = $_SESSION['email'];
+$sql = "SELECT `name` FROM `User` WHERE `email` = '$setEmail'";
 $result = $conn->query($sql);
 
 $row = mysqli_fetch_assoc($result);
@@ -35,8 +35,7 @@ $setName = $row['name'];
         <div class="pageTitle"><a href="index.php"> Project Manager</a></div>
         Welcome back <?php echo $setName ?>!
         <div class="buttons">
-            <a href="logout.php" class="logout">Log Out</a>
-            <a href="register.php" class="login">Register</a>
+            <a href="logout.php" class="login">Log Out</a>
         </div>
     </header>
     <nav>PROJECTS</nav>
