@@ -1,7 +1,12 @@
 window.onload = function () {
-    chat_refreshChat();
-    setInterval(chat_refreshChat, 10000);
+    refresh();
+    setInterval(refresh, 10000);
 };
+
+function refresh() {
+    chat_refreshChat();
+    projects_retrieveProjects()
+}
 
 function chat_refreshChat(){
     chat_retrieveMessages();

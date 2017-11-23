@@ -58,7 +58,7 @@ $setName = $row['name'];
     <footer>FOOTER</footer>
 </div>
 
-<script src="chat.js"></script>
+<script src="scripts/chat.js"></script>
 </body>
 </html>
 
@@ -109,6 +109,6 @@ else{
 <?php
 }
 ?>
-<script src="chat.js"></script>
+<script src="scripts/chat.js"></script>
 </body>
 </html>
