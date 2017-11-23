@@ -1,8 +1,11 @@
+window.onload = function () {
+    chat_refreshChat();
+    setInterval(chat_refreshChat, 10000);
+};
+
 function chat_refreshChat(){
     chat_retrieveMessages();
 }
-
-
 
 function chat_sendMessage(passedMessageBody) {
 

@@ -27,7 +27,7 @@ $setName = $row['name'];
 <head>
     <meta charset="UTF-8">
     <title>Project Manager</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
 <div class="grid">
@@ -77,7 +77,7 @@ else{
 <head>
     <meta charset="UTF-8">
     <title>Project Manager</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
 <div class="grid">

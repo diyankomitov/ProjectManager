@@ -69,8 +69,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Project Manager</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/register.css">
 </head>
 <body>
 <div class="grid">
