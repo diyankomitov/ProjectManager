@@ -15,16 +15,28 @@
                 <a href="register.html" class="link">Register</a>
         `    </div>
         </header>
-        <nav>PROJECTS</nav>
+        <nav>
+            <div>
+                <button type="button" onclick=" projects_retrieveProjects();">Refresh</button>
+            </div>
+            <div id="projects">
+                There are no projects.
+            </div>
+        </nav>
         <main>
             <div class="chatWrapper">
-                <div id="chat" class="chat"></div>
+                <div id="chat" class="chat">
+                    There are no messages.
+                </div>
             </div>
 
             <div class="chatInput">
-                <textarea class="inputMessage"></textarea>
+                <textarea id="textArea" class="inputMessage"></textarea>
                 <span class="beforeSubmit"></span>
-                <button type="button" id="submitMessage" class="submitMessage" onclick="test()">Send</button>
+                <button type="button" class="submitMessage"
+                        onclick="chat_sendMessage(document.getElementById('textArea').value);">
+                    Send
+                </button>
                 <span class="afterSubmit"></span>
             </div>
         </main>
@@ -33,5 +45,6 @@
     </div>
 
     <script src="chat.js"></script>
+    <script src="projects.js" ></script>
 </body>
 </html>
