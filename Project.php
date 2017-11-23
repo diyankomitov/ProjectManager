@@ -31,7 +31,15 @@ class Project {
     }
 
     public function buildHTMLMessage(){
-        $string = "<hr><p>$this->class : $this->name</p><hr>";
+        $string =
+                "<div class=\"projectWrapper\" onclick='/*openProjectHere*/'>
+                    <div class=\"projectClass\">
+                        <h2>$this->class</h2>
+                    </div>
+                    <div class=\"projectName\">
+                        <p>$this->name</p>
+                    </div>
+                </div>";
         return $string;
     }
 

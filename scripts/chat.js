@@ -31,6 +31,7 @@ function chat_sendMessage(passedMessageBody) {
                 if (xhr.status !== OK) {
                     alert('Error: ' + xhr.status); // An error occurred during the request.
                 }
+                chat_refreshChat();
             }
         };
         // Send the request to send-ajax-data.php

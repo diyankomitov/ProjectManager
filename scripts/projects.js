@@ -1,7 +1,3 @@
-// window.onload = function () {
-//     projects_retrieveProjects();
-//     setInterval(projects_retrieveProjects, 10000);
-// };
 
 function projects_retrieveProjects() {
 
