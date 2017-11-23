@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Project Manager</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
 <div class="grid">
@@ -12,11 +12,12 @@
         <div class="pageTitle"><a href="index.html"> Project Manager</a></div>
     </header>
     <main>
-        <form>
-            <label id="userLabel" for="username">Username</label>
-            <input type="text" id="username">
+        <form method="post" action="login.php">
+
+            <label id="userLabel" for="email">Email Address</label>
+            <input type="text" id="email" name="email">
             <label id="passLabel" for="password">Password</label>
-            <input type="password" id="password">
+            <input type="password" id="password" name="pass">
             <input id="submit" type="submit" value="Log In">
         </form>
     </main>
