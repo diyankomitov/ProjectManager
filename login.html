@@ -9,20 +9,22 @@
 <body>
 <div class="grid">
     <header>
-        <div class="pageTitle"><a href="index.html"> Project Manager</a></div>
+        <div class="pageTitle"><a href="index.html">Project: Efficiency</a></div>
+        <span class="divider"></span>
+        <div class="links"></div>
     </header>
     <main>
-        <form method="post" action="login.php">
-
+        <form id="loginForm">
             <label id="userLabel" for="email">Email Address</label>
-            <input type="text" id="email" name="email">
+            <input type="email" id="email" name="email" required>
             <label id="passLabel" for="password">Password</label>
-            <input type="password" id="password" name="pass">
-            <input id="submit" type="submit" value="Log In">
+            <input type="password" id="password" name="pass" required>
+            <a id="registerLink" href="register.html">Don't have an account?<br>Register here</a>
+            <input id="submit" type="submit" value="Log in" onclick="login()">
         </form>
     </main>
+    <footer>Created by Group H for CS312</footer>
 
-    <footer>FOOTER</footer>
-</div>
+    <script src="scripts/login.js"></script>
 </body>
 </html>

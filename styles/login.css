@@ -1,55 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:700i');
 
-/***********************************************/
-/*                  CSS RESET                  */
-/***********************************************/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, main {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-body {
-    line-height: 1;
-}
-ol, ul {
-    list-style: none;
-}
-blockquote, q {
-    quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-/***********************************************/
-/*                END CSS RESET                */
-/***********************************************/
 * {
     box-sizing: border-box;
 }
@@ -57,49 +7,101 @@ table {
 .grid {
     display: grid;
     height: 100vh;
-    padding: 1vh;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
         "head head head head head head head head"
-        ".... .... main main main main .... ...."
+        "main main main main main main main main"
         "foot foot foot foot foot foot foot foot"
     ;
-    grid-gap: 0.6rem;
+    /*grid-gap: 0.6rem;*/
 }
 
 main {
-    font-size: 1.5rem;
     grid-area: main;
     align-self: center;
     justify-self: center;
 }
 
-main form {
+#loginForm {
+    border: 0.3rem solid var(--main-color);
+    border-radius: 1rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: minmax(auto, 1fr) minmax(auto, 1fr);
+    grid-template-rows: auto auto auto;
     grid-template-areas:
             "label1 input1"
             "label2 input2"
-            "...... input3"
+            "error   error"
+            "register input3"
 ;
-    grid-gap: 0.6rem;
+    grid-gap: 1rem;
+    padding: 2rem;
 }
 
-main #userLabel {
+#loginForm * {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.6rem;
+    color: var(--main-color);
+}
+
+#userLabel {
     grid-area: label1;
 }
-main #passLabel {
+#passLabel {
     grid-area: label2;
 }
-main #username {
+#email {
+    font-size: 1rem;
+    color: white;
+    border: none;
+    background-color: var(--main-color);
+    padding: 0.5rem;
     grid-area: input1;
 }
-main #password {
+#password {
+    font-size: 1rem;
+    color: white;
+    border: none;
+    background-color: var(--main-color);
+    padding: 0.5rem;
     grid-area: input2;
 }
-main #submit {
+
+#registerLink {
+    font-size: 1.2rem;
+    grid-area: register;
+}
+
+#registerLink:hover {
+    color: #A75900;
+}
+#registerLink:active {
+    color: #ffd5a4;
+}
+
+#submit {
+    justify-self: end;
+    font-size: 1.2rem;
+    color: white;
+    border: none;
+    background-color: var(--main-color);
+    padding: 0.5rem;
     grid-area: input3;
+}
+
+#submit:hover {
+    color: #ffd5a4;
+}
+#submit:active {
+    color: #A75900;
+}
+
+.loginError {
+    grid-area: error;
+    background-color: red;
+    color: white !important;
+    font-size: 1rem !important;
+    padding: 0.5rem;
 }
 

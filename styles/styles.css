@@ -65,7 +65,6 @@ table {
     min-height: 50rem;
     display: grid;
     height: 100vh;
-    padding: 0.6rem;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
@@ -77,9 +76,6 @@ table {
 }
 
 .grid > * {
-    /*border: 0.1rem solid rgb(0,95,107);*/
-    border-radius: 0.2rem;
-    /*font-weight: bold;*/
     padding: 0.6rem;
 }
 
@@ -145,6 +141,7 @@ header {
 
 
 nav {
+    overflow-y: scroll;
     grid-area: nav;
     display: grid;
     grid-template-columns: 1fr;
@@ -313,5 +310,8 @@ aside {
 }
 
 footer {
+    font-family: 'Lato', sans-serif;
+    color: white;
     grid-area: foot;
+    background-color: var(--main-color);
 }
