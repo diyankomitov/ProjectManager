@@ -38,15 +38,24 @@ $setName = $row['name'];
             <a href="logout.php" class="login">Log Out</a>
         </div>
     </header>
-    <nav>PROJECTS</nav>
+    <nav>
+        <div>
+            <button type="button" onclick=" projects_retrieveProjects();">Refresh</button>
+            <button type="button" onclick="window.location.href = ' createProject.html';">Create</button>
+        </div>
+        <div id="projects">
+            There are no projects.
+        </div>
+    </nav>
     <main>
         <div id="chat" class="chat">
-    There are no messages.
+            There are no messages.
         </div>
 
         <div class="chatInput">
             <textarea id="textArea" class="message"></textarea>
-            <button type="button" class="submitMessage"
+            <button type="button"
+                    class="submitMessage"
                     onclick="chat_sendMessage(document.getElementById('textArea').value);">
                         Send
             </button>
@@ -56,10 +65,6 @@ $setName = $row['name'];
     <aside>FILES</aside>
     <footer>FOOTER</footer>
 </div>
-
-<script src="chat.js"></script>
-</body>
-</html>
 
 <?php
 
@@ -92,15 +97,6 @@ else{
         <div id="chat" class="chat">
             There are no messages.
         </div>
-
-        <div class="chatInput">
-            <textarea id="textArea" class="message"></textarea>
-            <button type="button" class="submitMessage"
-                    onclick="chat_sendMessage(document.getElementById('textArea').value);">
-                Send
-            </button>
-            <button type="button" onclick="chat_refreshChat();">Refresh</button>
-        </div>
     </main>
     <aside>FILES</aside>
     <footer>FOOTER</footer>
@@ -109,5 +105,6 @@ else{
 }
 ?>
 <script src="chat.js"></script>
+<script src="projects.js"></script>
 </body>
 </html>
