@@ -41,6 +41,7 @@ function projects_createProject() {
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
                 window.location.href = 'index.html';
+                // document.getElementById("error").innerHTML += xhr.responseText
             } else{
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }

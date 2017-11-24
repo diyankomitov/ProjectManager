@@ -15,7 +15,6 @@ $class = $conn->real_escape_string($_GET["class"]);
 $name = $conn->real_escape_string($_GET["name"]);
 $description =$conn->real_escape_string($_GET["description"]);
 $deadline = $conn->real_escape_string($_GET["deadline"]);
-$deadline = null; //TODO: remove me when fixed dates
 
 $newProjectId = getNewProjectId($conn);
 $success = createProjectEntry($conn, $newProjectId, $class, $name, $description, 0, $deadline)
