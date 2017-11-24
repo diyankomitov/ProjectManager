@@ -25,10 +25,21 @@ sup {
 main {
     grid-area: main;
     align-self: center;
-    justify-self: center;
+    justify-self: center;display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "registerHeader" "registerForm";
+}
+
+#registerHeader {
+    grid-area: registerHeader;
+    font-family: 'Lato', sans-serif;
+    font-size: 2rem;
+    color: var(--main-color);
+    padding-left: 1rem;
 }
 
 #registerForm {
+    grid-area: registerForm;
     border: 0.3rem solid var(--main-color);
     border-radius: 1rem;
     display: grid;
