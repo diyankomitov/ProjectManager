@@ -10,39 +10,152 @@
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
-            "head head head head head head head head"
-            ".... .... main main main main .... ...."
-            "foot foot foot foot foot foot foot foot"
+        "head head head head head head head head"
+        "main main main main main main main main"
+        "foot foot foot foot foot foot foot foot"
 ;
-    grid-gap: 0.6rem;
+    /*grid-gap: 0.6rem;*/
+}
+
+sup {
+    vertical-align: super;
+    font-size: 0.8rem !important;
 }
 
 main {
-    font-size: 1.5rem;
     grid-area: main;
     align-self: center;
     justify-self: center;
 }
 
-main form {
+#registerForm {
+    border: 0.3rem solid var(--main-color);
+    border-radius: 1rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 0.6rem;
+    grid-template-columns: minmax(auto, 1fr) minmax(auto, 1fr);
+    grid-template-rows: auto auto auto auto auto auto auto;
+    grid-template-areas:
+            "label1 input1"
+            "label2 input2"
+            "label3 input3"
+            "label4 input4"
+            "label5 input5"
+            "error   error"
+            "login input6"
+;
+    grid-gap: 1rem;
+    padding: 2rem;
 }
 
-/*main #userLabel {*/
-    /*grid-area: label1;*/
-/*}*/
-/*main #passLabel {*/
-    /*grid-area: label2;*/
-/*}*/
-/*main #username {*/
-    /*grid-area: input1;*/
-/*}*/
-/*main #password {*/
-    /*grid-area: input2;*/
-/*}*/
-main #submit {
-    grid-column: 2;
+#registerForm * {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.6rem;
+    color: var(--main-color);
 }
+
+#nameLabel {
+    grid-area: label1;
+}
+#emailLabel {
+    grid-area: label2;
+}
+#passLabel {
+    grid-area: label3;
+}
+#uniLabel {
+    grid-area: label4;
+}
+#courseLabel {
+    grid-area: label5;
+}
+
+#name {
+    font-size: 1rem;
+    color: white;
+    background-color: var(--main-color);
+    padding: 0.5rem;
+    grid-area: input1;
+}
+
+/*input:focus:valid {*/
+/*background-color: #3fff68 !important;*/
+/*}*/
+
+/*input:focus:invalid {*/
+/*background-color: #ff353b !important;*/
+/*}*/
+
+#email {
+    font-size: 1rem;
+    color: white;
+    border: none;
+    background-color: var(--main-color);
+    padding: 0.5rem;
+    grid-area: input2;
+}
+
+#password {
+    font-size: 1rem;
+    color: white;
+    border: none;
+    background-color: var(--main-color);
+    padding: 0.5rem;
+    grid-area: input3;
+}
+
+#uni {
+    font-size: 1rem;
+    color: white;
+    border: none;
+    background-color: var(--main-color);
+    padding: 0.5rem;
+    grid-area: input4;
+}
+
+#course {
+    font-size: 1rem;
+    color: white;
+    border: none;
+    background-color: var(--main-color);
+    padding: 0.5rem;
+    grid-area: input5;
+}
+
+#loginLink {
+    font-size: 1.2rem;
+    grid-area: login;
+}
+
+#loginLink:hover {
+    color: #A75900;
+}
+#loginLink:active {
+    color: #ffd5a4;
+}
+
+#submit {
+    justify-self: end;
+    font-size: 1.2rem;
+    color: white;
+    border: none;
+    background-color: var(--main-color);
+    padding: 0.5rem;
+    grid-area: input6;
+}
+
+#submit:hover {
+    color: #ffd5a4;
+}
+#submit:active {
+    color: #A75900;
+}
+
+.loginError {
+    grid-area: error;
+    background-color: red;
+    color: white !important;
+    font-size: 1rem !important;
+    padding: 0.5rem;
+}
+
 

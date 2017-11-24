@@ -1,22 +1,20 @@
-window.onload = function() {
-    var url = window.location.href;
-    if(url.includes("login.html?registered=true")) {
-        document.getElementById("loginHeader").innerHTML = "Thank you for Registering. Please Log In"
-        document.getElementById("loginHeader").classList.add("centered")
-    }
-};
 
-function login() {
-    var form = document.getElementById("loginForm");
+function register() {
+    var form = document.getElementById("registerForm");
     if(form.checkValidity() === true) {
         form.onsubmit = function (e) {
             e.preventDefault();
         };
         // Initialize the HTTP request.
         var xhr = new XMLHttpRequest();
-        var phpPage = 'login.php';
+        var phpPage = 'register.php';
+
+        var name = document.getElementById("name").value;
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
+        var uni = document.getElementById("uni").value;
+        var course = document.getElementById("course").value;
+
         xhr.open("POST", phpPage, true);
         // Track the state changes of the request.
 
@@ -26,18 +24,18 @@ function login() {
             var OK = 200; // status 200 is a successful return.
             if (xhr.readyState === DONE) {
                 if (xhr.status === OK) {
-                    if(xhr.responseText === "") {
-                        window.location.href = "index.html"
+                    if(xhr.responseText.trim() === "") {
+                        window.location.href = "login.html?registered=true"
                     }
                     else {
-                        document.getElementById("loginForm").innerHTML = xhr.responseText; // 'This is the returned text.'
+                        document.getElementById("registerForm").innerHTML = xhr.responseText; // 'This is the returned text.'
                     }
                 } else {
                     alert('Error: ' + xhr.statusText); // An error occurred during the request.
                 }
             }
         };
-        xhr.send("email=" + email + "&" + "password=" + password);
+        xhr.send("name=" + name + "&" + "email=" + email + "&" + "password=" + password + "&" + "uni=" + uni + "&" + "course=" + course);
     }
 
 

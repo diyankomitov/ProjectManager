@@ -1,108 +1,68 @@
 
-
 <?php
 
 session_start();
 
-if( isset($_SESSION['email'])!="" ){
-    header("Location: index.html");
-}
+if(!isset($_SESSION['email'])!="" ){
 
-include_once 'databaseConn.php';
-$conn = connectToDatabase();
+    include_once 'databaseConn.php';
+    $conn = connectToDatabase();
 
-function safePost($conn, $name){
-    if(isset($_POST[$name])){
-        return $conn-> real_escape_string(strip_tags($_POST[$name]));
-    } else {
-        return "";
-    }
-}
-
-
-$error = false;
-$emailError = $passError = $nameError ="";
-$successful = "";
-
-$name = safePost($conn, "name");
-$email = safePost($conn, "email");
-$pass = safePost($conn, "pass");
-
-
-
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    if (empty($email)) {
-        $emailError = "* Please enter an email address";
-        $error = true;
-    }
-    else if( !filter_var($email,FILTER_VALIDATE_EMAIL)) {
-        $emailError = "* Please enter a valid email address";
-        $error = true;
+    function sanitizeValues($conn, $value){
+        if(isset($_POST[$value])){
+            return $conn-> real_escape_string(strip_tags($_POST[$value]));
+        } else {
+            return "";
+        }
     }
 
-    if (empty($name)) {
-        $nameError = "* Please enter a valid name";
-        $error = true;
+    $name = sanitizeValues($conn, "name");
+    $email = sanitizeValues($conn, "email");
+    $password = sanitizeValues($conn, "password");
+    $uni = sanitizeValues($conn, "uni");
+    $course = sanitizeValues($conn, "course");
+
+    $sql = "SELECT `email` FROM `User` WHERE `email` = '$email'";
+    $result = $conn->query($sql);
+    $rows = mysqli_num_rows($result);
+
+    $error = "";
+
+    if ($rows == 1) {
+        $error = "This email address is already in use. Please enter another one.";
+    }
+    else if (empty($name) || empty($email) || empty($password) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Something went wrong with your registration. Please try again.";
     }
 
-    if (empty($pass)) {
-        $passError = "*     Please enter a valid password";
-        $error = true;
-    }
+    if ($error === "") {
+        $hashedAndSaltedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    if (!$error) {
-
-        $sql = "INSERT INTO `User` (`id`, `email`, `pass`, `name`, `uni`, `course`, `profile_pic_path`) VALUES (NULL,'$email', '$pass', '$name', NULL, NULL, NULL)";
+        $sql = "INSERT INTO `User` (`email`, `pass`, `name`, `uni`, `course`) VALUES ('$email', '$hashedAndSaltedPassword', '$name', '$uni', '$course')";
         $result = $conn->query($sql);
-        $successful = "Registration successful you may now login";
+        echo "";
+    }
+    else{
+        ?>
+        <label id="nameLabel" for="name">Full Name <sup>(Required)</sup></label>
+        <input type="text"  id="name" name="name" value="<?php echo $name ?>" required>
 
+        <label id="emailLabel" for="Email">Email Address <sup>(Required)</sup></label>
+        <input type="email" id="email" name="email" value="<?php echo $email ?>" required>
+
+        <label id="passLabel" for="password">Password <sup>(Required)</sup></label>
+        <input type="password" id="password" name="pass"" required>
+
+        <label id="uniLabel" for="uni">University</label>
+        <input type="text" id="uni" name="uni" value="<?php echo $uni ?>">
+
+        <label id="courseLabel" for="course">Course</label>
+        <input type="text" id="course" name="course" value="<?php echo $course ?>">
+
+        <p class="loginError"><?php echo $error ?></p>
+
+        <a id="loginLink" href="login.html">Already have an account?<br>Login here</a>
+        <input id="submit" type="submit" value="Register" onclick="register()">
+        <?php
     }
 }
-
-?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Project Manager</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/register.css">
-</head>
-<body>
-<div class="grid">
-    <header>
-        <div class="pageTitle"><a href="index.html"> Project Manager</a></div>
-    </header>
-    <main>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
-            <label id="firstLabel" for="name">Full Name</label>
-            <input type="text" id="name" name="name" value="<?php echo $name; ?>">
-            <label id="dobLabel" for="dob">Date of Birth</label>
-            <input type="date" id="dob" name="dob">
-            <label id="userLabel" for="Email">Email Address</label>
-            <input type="text" id="Email" name="email" value="<?php echo $email; ?>">
-            <label id="passLabel" for="password">Password</label>
-            <input type="password" id="password" name="pass" value="<?php echo $pass; ?>">
-            <input id="submit" type="submit" value="Register">
-        </form>
-        <?php
-        echo $emailError;
-        echo "<p>  $passError </p>";
-        echo "<p>  $nameError </p>";
-
-        if($successful != "")
-        {echo "$successful.<a href=\"login.php\"><u>Login here</u></a>";}
-        ?>
-    </main>
-
-
-
-    <footer>FOOTER</footer>
-</div>
-</body>
-</html>
