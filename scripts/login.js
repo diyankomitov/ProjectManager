@@ -1,7 +1,7 @@
 window.onload = function() {
     var url = window.location.href;
     if(url.includes("login.html?registered=true")) {
-        document.getElementById("loginHeader").innerHTML = "Thank you for Registering. Please Log In"
+        document.getElementById("loginHeader").innerHTML = "Thank you for Registering. Please Log In";
         document.getElementById("loginHeader").classList.add("centered")
     }
 };
@@ -27,7 +27,7 @@ function login() {
             if (xhr.readyState === DONE) {
                 if (xhr.status === OK) {
                     if(xhr.responseText === "") {
-                        window.location.href = "index.html"
+                        window.location.href = "index.php"
                     }
                     else {
                         document.getElementById("loginForm").innerHTML = xhr.responseText; // 'This is the returned text.'
@@ -39,6 +39,4 @@ function login() {
         };
         xhr.send("email=" + email + "&" + "password=" + password);
     }
-
-
 }

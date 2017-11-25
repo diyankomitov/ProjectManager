@@ -118,7 +118,8 @@ header {
     grid-area: login;
 
 }
-.link {
+
+.links * {
     margin-top: 1rem;
     margin-right: 1rem;
     display: inline-block;
@@ -127,10 +128,10 @@ header {
     color: white;
 }
 
-.link:hover {
+.links a:hover {
     color: #ffd5a4;
 }
-.link:active {
+.links a:active {
     color: #A75900;
 }
 

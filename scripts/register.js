@@ -1,4 +1,3 @@
-
 function register() {
     var form = document.getElementById("registerForm");
     if(form.checkValidity() === true) {
@@ -37,6 +36,4 @@ function register() {
         };
         xhr.send("name=" + name + "&" + "email=" + email + "&" + "password=" + password + "&" + "uni=" + uni + "&" + "course=" + course);
     }
-
-
 }
