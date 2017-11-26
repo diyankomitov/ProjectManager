@@ -8,4 +8,4 @@
 session_start();
 
 //Set the session's project to the passed project.
-$_SESSION['projectId'] = $_GET["id"];
+$_SESSION['selectedProjectId'] = $_GET["id"];

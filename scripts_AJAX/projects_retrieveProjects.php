@@ -5,15 +5,13 @@
  * Date: 17/11/2017
  * Time: 23:56
  */
-
+require  "Project.php";
 session_start();
 header('Content-Type: text/');
 
 //Connect to database
 require_once "databaseConn.php";
 $conn = connectToDatabase();
-
-include "Project.php";
 
 $userId = $_SESSION['userId'];
 
@@ -46,6 +44,10 @@ function getProjects($conn, $userId){
         }
     }
 
+    foreach ($projects as $project){
+        $_SESSION['projects'][$project->getId()] = $project;
+    }
+
     return $projects;
 }
 
@@ -55,7 +57,7 @@ function buildReturnString($projects){
     $string = "";
 
     foreach ($projects as $project) {
-        $string = $string . $project->buildHTML();
+        $string = $string . $project->buildNavHTML();
     };
 
     return $string;

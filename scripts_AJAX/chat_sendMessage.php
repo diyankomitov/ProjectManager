@@ -12,7 +12,7 @@ header('Content-Type: text/');
 require_once "databaseConn.php";
 $conn = connectToDatabase();
 
-$projectId = $_SESSION['projectId'];
+$projectId = $_SESSION['selectedProjectId'];
 $userId = $_SESSION['userId'];
 $messageBody = $conn->real_escape_string($_GET["messageBody"]);
 

@@ -18,8 +18,8 @@ $conn = connectToDatabase();
 include "Message.php";
 
 //If the user has selected a project
-if(isset($_SESSION['projectId']) && !empty($_SESSION['projectId'])){
-    $projectId = $_SESSION["projectId"];
+if(isset($_SESSION['selectedProjectId']) && !empty($_SESSION['selectedProjectId'])){
+    $projectId = $_SESSION["selectedProjectId"];
     $userId = $_SESSION['userId'];
     $dateFrom = $_GET["dateFrom"];
     $dateUpTo = $_GET["dateUpTo"];

@@ -11,7 +11,6 @@ if( isset($_SESSION['email'])!="") {
 
 
 
-//$_SESSION['projectId'] = 4;
 $setEmail = $_SESSION['email'];
 $sql = "SELECT `name` FROM `User` WHERE `email` = '$setEmail'";
 $result = $conn->query($sql);
@@ -29,7 +28,7 @@ $setName = $row['name'];
     <title>Project Manager</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        setInterval(function(){chat_refreshChat()}, 5000);
+//        setInterval(function(){chat_refreshChat()}, 5000);
     </script>
 </head>
 <body>
@@ -66,6 +65,14 @@ $setName = $row['name'];
         </div>
     </main>
     <aside>
+        <div id="projectInfo">
+            <div id='info_buttons'>
+            </div>
+            <div id='info_info'>
+            </div>
+            <div id='info_users'>
+            </div>
+        </div>
         <div id="error"></div>
 <!--        --><?php //echo "<p> ". $_SESSION['userId'] . "</p><p>" . $_SESSION["error"] ."</p>" ?><!-- -->
     </aside>

@@ -2,6 +2,7 @@
 
 function chat_refreshChat(){
     chat_retrieveMessages();
+    projects_retrieveProjectInfo();
 }
 
 //This function runs the chat_sendMessage.php AJAX script.

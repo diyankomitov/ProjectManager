@@ -78,3 +78,62 @@ function projects_openProject(projectId){
     // Send the request to send-ajax-data.php
     xhr.send(null);
 }
+
+//This function runs the projects_retrieveProjectInfo.php AJAX script.
+function projects_retrieveProjectInfo(){
+    // Initialize the HTTP request.
+    var xhr = new XMLHttpRequest();
+    var phpPage = 'scripts_AJAX/projects_retrieveProjectInfo.php';
+    xhr.open('get', phpPage);
+
+    // Track the state changes of the request.
+    xhr.onreadystatechange = function () {
+        var DONE = 4; // readyState 4 means the request is done.
+        var OK = 200; // status 200 is a successful return.
+        if (xhr.readyState === DONE) {
+            if (xhr.status === OK) {
+                //If all went well,
+                var infoArray = JSON.parse(xhr.responseText);
+                document.getElementById("info_buttons").innerHTML = infoArray[0];
+                projects_getUsersInProject();
+                document.getElementById("info_info").innerHTML = infoArray[1];
+            } else {
+                alert('Error: ' + xhr.status); // An error occurred during the request.
+            }
+        }
+    };
+    // Send the request to send-ajax-data.php
+    xhr.send(null);
+}
+
+function projects_addUser(email) {
+
+}
+
+function projects_deleteProject(id) {
+
+}
+
+function projects_getUsersInProject() {
+    // Initialize the HTTP request.
+    var xhr = new XMLHttpRequest();
+    var phpPage = 'scripts_AJAX/projects_getUsersInProject.php';
+    xhr.open('get', phpPage);
+
+    // Track the state changes of the request.
+    xhr.onreadystatechange = function () {
+        var DONE = 4; // readyState 4 means the request is done.
+        var OK = 200; // status 200 is a successful return.
+        if (xhr.readyState === DONE) {
+            if (xhr.status === OK) {
+                //If all went well, return the response html
+                document.getElementById("info_users").innerHTML = "<hr> " + xhr.responseText + "<hr>";
+            } else {
+                alert('Error: ' + xhr.status); // An error occurred during the request.
+            }
+        }
+    };
+    // Send the request to send-ajax-data.php
+    xhr.send(null);
+
+}
