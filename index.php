@@ -68,6 +68,8 @@ $setName = $row['name'];
         <div id="projectInfo">
             <div id='info_buttons'>
             </div>
+            <div id="info_error">
+            </div>
             <div id='info_info'>
             </div>
             <div id='info_users'>

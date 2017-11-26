@@ -92,7 +92,7 @@ function projects_retrieveProjectInfo(){
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
-                //If all went well,
+                //If all went well, set the aside to the returned html
                 var infoArray = JSON.parse(xhr.responseText);
                 document.getElementById("info_buttons").innerHTML = infoArray[0];
                 projects_getUsersInProject();
@@ -106,14 +106,7 @@ function projects_retrieveProjectInfo(){
     xhr.send(null);
 }
 
-function projects_addUser(email) {
-
-}
-
-function projects_deleteProject(id) {
-
-}
-
+// This function runs the projects_getUsersInProject.php AJAX script
 function projects_getUsersInProject() {
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
@@ -137,3 +130,37 @@ function projects_getUsersInProject() {
     xhr.send(null);
 
 }
+
+function projects_addUser(email) {
+
+    //If the email is non-empty.
+    if(email.trim() !== "") {
+        // Initialize the HTTP request.
+        var xhr = new XMLHttpRequest();
+        var phpPage = 'scripts_AJAX/projects_addUser.php';
+        var email = 'email=' + email;
+        xhr.open('get', phpPage + '?' + email);
+
+        // Track the state changes of the request.
+        xhr.onreadystatechange = function () {
+            var DONE = 4; // readyState 4 means the request is done.
+            var OK = 200; // status 200 is a successful return.
+            if (xhr.readyState === DONE) {
+                if (xhr.status === OK) {
+                    //If all went well, retrieve the projectInfo
+                    projects_retrieveProjectInfo();
+                    document.getElementById('info_error').innerHTML = xhr.responseText;
+                } else {
+                    alert('Error: ' + xhr.status); // An error occurred during the request.
+                }
+            }
+        };
+        // Send the request to send-ajax-data.php
+        xhr.send(null);
+    }
+}
+
+function projects_leaveProject() {
+
+}
+
