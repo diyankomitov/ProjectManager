@@ -12,10 +12,8 @@ function chat_sendMessage(passedMessageBody) {
         // Initialize the HTTP request.
         var xhr = new XMLHttpRequest();
         var phpPage = 'chat_sendMessage.php';
-        var projectId = 'project=1';
-        var userId = 'user=2';
         var messageBody = 'messageBody=' + passedMessageBody;
-        xhr.open('get', phpPage + '?' + projectId + '&' + userId + '&' + messageBody);
+        xhr.open('get', phpPage + '?' + messageBody);
 
         // Track the state changes of the request.
         xhr.onreadystatechange = function () {
@@ -36,11 +34,9 @@ function chat_retrieveMessages() {
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
     var phpPage = 'chat_retrieveMessages.php';
-    var projectId = 'project=1';
-    var userId = 'user=2';
     var dateFrom = 'dateFrom=' + 'dateHere';
     var dateUpTo = 'dateUpTo=' + 'dateHere';
-    xhr.open('get', phpPage +'?' + projectId + '&' + userId + '&' + dateFrom + '&' + dateUpTo);
+    xhr.open('get', phpPage +'?' + dateFrom + '&' + dateUpTo);
 
     // Track the state changes of the request.
     xhr.onreadystatechange = function () {
@@ -48,6 +44,7 @@ function chat_retrieveMessages() {
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
+                // alert("it worked");
                 document.getElementById("chat").innerHTML = xhr.responseText; // 'This is the returned text.'
             } else {
                 alert('Error: ' + xhr.status); // An error occurred during the request.

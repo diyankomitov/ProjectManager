@@ -8,7 +8,7 @@
  * Date: 14/11/2017
  * Time: 14:26
  */
-
+session_start();
 header('Content-Type: text/');
 
 require_once "databaseConn.php";
@@ -16,15 +16,18 @@ $conn = connectToDatabase();
 
 include "Message.php";
 
-$projectId = $_GET["project"];
-$userId = $_GET["user"];
-$dateFrom = $_GET["dateFrom"];
-$dateUpTo = $_GET["dateUpTo"];
+if(isset($_SESSION['projectId']) && !empty($_SESSION['projectId'])){
+    $projectId = $_SESSION["projectId"];
+    $userId = $_SESSION['userId'];
+    $dateFrom = $_GET["dateFrom"];
+    $dateUpTo = $_GET["dateUpTo"];
 
+    $messages = getMessages($conn, $projectId, $dateFrom, $dateUpTo);
+    $returnString = buildReturnString($messages, $userId);
 
-$messages = getMessages($conn, $projectId, $dateFrom, $dateUpTo);
-$returnString = buildReturnString($messages, $userId);
-
+}else {
+    $returnString = "<p>Click or create a project</p>";
+}
 
 echo $returnString;
 

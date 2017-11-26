@@ -6,6 +6,7 @@
  * Time: 23:56
  */
 
+session_start();
 header('Content-Type: text/');
 
 require_once "databaseConn.php";
@@ -13,7 +14,7 @@ $conn = connectToDatabase();
 
 include "Project.php";
 
-$userId = $_GET["user"];
+$userId = $_SESSION['userId'];
 
 
 $projects = getProjects($conn, $userId);
@@ -41,6 +42,8 @@ function getProjects($conn, $userId){
             while ($row = $result->fetch_array()) {
                 array_push($projects, new Project($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6]));
             }
+        } else{
+            echo "ahhhhh";
         }
     }
 

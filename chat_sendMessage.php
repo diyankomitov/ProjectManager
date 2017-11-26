@@ -5,18 +5,19 @@
  * Date: 09/11/2017
  * Time: 18:52
  */
-
+session_start();
+header('Content-Type: text/');
 
 require_once "databaseConn.php";
 $conn = connectToDatabase();
 
-$projectId = $conn->real_escape_string($_GET["project"]);
-$userId = $conn->real_escape_string($_GET["user"]);
+$projectId = $_SESSION['projectId'];
+$userId = $_SESSION['userId'];
 $messageBody = $conn->real_escape_string($_GET["messageBody"]);
 
 $newMessageId = getNewMessageId($conn);
 createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageBody);
-createReceivedMessageEntries($conn, $userId, $newMessageId, $projectId);
+// createReceivedMessageEntries($conn, $userId, $newMessageId, $projectId);
 
 //=============================================//
 //              Functions below                //
@@ -47,7 +48,7 @@ function createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageB
 
 function createReceivedMessageEntries($conn, $currentUserId, $newMessageId, $projectID){
 
-    //Get all OTHER userIds in projectId
+    //Get all OTHER userIds in project
     $otherUserIds = [];
     $result = $conn->query("SELECT `user_id` FROM `UserProject` WHERE `project_id` = '$projectID'");
     if($result->num_rows  > 0) {

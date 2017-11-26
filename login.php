@@ -14,6 +14,23 @@ function safePost($conn, $name){
     }
 }
 
+function getUserId($conn, $email){
+    $result = $conn->query("SELECT `id` FROM `User` WHERE `email` = '$email';");
+
+    if($conn->error) {
+        $_SESSION['error'] += "<p>Conn error: $conn->error</p>";
+    } else if($result->num_rows === 0) {
+        $_SESSION['error'] += "<p>getUserId() - num of rows = 0</p>";
+    } else if ($result->num_rows > 1) {
+        $_SESSION['error'] += "<p>getUserId() - num of rows > 1</p>";
+    } else {
+        return $result->fetch_array()[0];
+    }
+
+    return -1;
+
+}
+
 
 $error = false;
 $emailError = $passError = "";
@@ -49,6 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($rows == 1){
             $_SESSION['email'] = $email;
+            $_SESSION['userId'] = getUserId($conn, $email);
             $successful = "Login successful";
         }
         else{
@@ -94,9 +112,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>  $passError </p>";
 
         if($successful != "")
-                {header("Location: index.php");}
+            {header("Location: index.php");}
         if($notSuccessful != "")
-            {echo $notSuccessful;}
+            echo $notSuccessful;
         ?>
 
         <p>Not registered yet? <a href='register.php'><u>Register Here</u></a></p>

@@ -3,8 +3,7 @@ function projects_retrieveProjects() {
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
     var phpPage = 'projects_retrieveProjects.php';
-    var userId = 'user=2';
-    xhr.open('get', phpPage + '?' + userId);
+    xhr.open('get', phpPage);
 
     // Track the state changes of the request.
     xhr.onreadystatechange = function () {
@@ -42,6 +41,30 @@ function projects_createProject() {
             if (xhr.status === OK) {
                 window.location.href = 'index.html';
                 // document.getElementById("error").innerHTML += xhr.responseText
+            } else{
+                alert('Error: ' + xhr.status); // An error occurred during the request.
+            }
+        }
+    };
+    // Send the request to send-ajax-data.php
+    xhr.send(null);
+}
+
+function projects_openProject(projectId){
+    var xhr = new XMLHttpRequest();
+    var phpPage = 'projects_setCurrentProject.php';
+    var id = 'id=' + projectId;
+    xhr.open('get', phpPage + '?' + id);
+
+    // Track the state changes of the request.
+    xhr.onreadystatechange = function () {
+        var DONE = 4; // readyState 4 means the request is done.
+        var OK = 200; // status 200 is a successful return.
+        if (xhr.readyState === DONE) {
+            if (xhr.status === OK) {
+                chat_refreshChat();
+                // alert(xhr.responseText);
+                 // document.getElementById("error").innerHTML += xhr.responseText
             } else{
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }
