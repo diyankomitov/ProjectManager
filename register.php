@@ -8,7 +8,7 @@ if( isset($_SESSION['email'])!="" ){
     header("Location: index.php");
 }
 
-include_once 'databaseConn.php';
+include_once 'scripts_AJAX/databaseConn.php';
 $conn = connectToDatabase();
 
 function safePost($conn, $name){

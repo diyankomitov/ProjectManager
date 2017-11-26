@@ -7,7 +7,6 @@
  */
 session_start();
 $_SESSION['projectId'] = $_GET["id"];
-$_SESSION['isClicked'] = 'yes';
 
 header('Content-Type: text/');
 

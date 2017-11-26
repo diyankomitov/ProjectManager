@@ -4,14 +4,12 @@ function chat_refreshChat(){
     chat_retrieveMessages();
 }
 
-
-
 function chat_sendMessage(passedMessageBody) {
 
     if(passedMessageBody.trim() !== "") {
         // Initialize the HTTP request.
         var xhr = new XMLHttpRequest();
-        var phpPage = 'chat_sendMessage.php';
+        var phpPage = 'scripts_AJAX/chat_sendMessage.php';
         var messageBody = 'messageBody=' + passedMessageBody;
         xhr.open('get', phpPage + '?' + messageBody);
 
@@ -20,7 +18,9 @@ function chat_sendMessage(passedMessageBody) {
             var DONE = 4; // readyState 4 means the request is done.
             var OK = 200; // status 200 is a successful return.
             if (xhr.readyState === DONE) {
-                if (xhr.status !== OK) {
+                if (xhr.status === OK) {
+                    chat_refreshChat();
+                } else{
                     alert('Error: ' + xhr.status); // An error occurred during the request.
                 }
             }
@@ -33,7 +33,7 @@ function chat_sendMessage(passedMessageBody) {
 function chat_retrieveMessages() {
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
-    var phpPage = 'chat_retrieveMessages.php';
+    var phpPage = 'scripts_AJAX/chat_retrieveMessages.php';
     var dateFrom = 'dateFrom=' + 'dateHere';
     var dateUpTo = 'dateUpTo=' + 'dateHere';
     xhr.open('get', phpPage +'?' + dateFrom + '&' + dateUpTo);

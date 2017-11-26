@@ -2,7 +2,7 @@ function projects_retrieveProjects() {
 
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
-    var phpPage = 'projects_retrieveProjects.php';
+    var phpPage = 'scripts_AJAX/projects_retrieveProjects.php';
     xhr.open('get', phpPage);
 
     // Track the state changes of the request.
@@ -25,7 +25,7 @@ function projects_createProject() {
 
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
-    var phpPage = 'projects_createProject.php';
+    var phpPage = 'scripts_AJAX/projects_createProject.php';
     var user = 'user=2';
     var classs = 'class=' + document.getElementById("class").value;
     var project = 'name=' + document.getElementById("name").value;
@@ -52,7 +52,7 @@ function projects_createProject() {
 
 function projects_openProject(projectId){
     var xhr = new XMLHttpRequest();
-    var phpPage = 'projects_setCurrentProject.php';
+    var phpPage = 'scripts_AJAX/projects_setCurrentProject.php';
     var id = 'id=' + projectId;
     xhr.open('get', phpPage + '?' + id);
 

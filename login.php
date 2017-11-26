@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-include_once 'databaseConn.php';
+include_once 'scripts_AJAX/databaseConn.php';
 $conn = connectToDatabase();
 
 function safePost($conn, $name){

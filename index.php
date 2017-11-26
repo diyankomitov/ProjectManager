@@ -2,7 +2,7 @@
 
 session_start();
 
-include_once 'databaseConn.php';
+include_once 'scripts_AJAX/databaseConn.php';
 $conn = connectToDatabase();
 
 
@@ -110,7 +110,7 @@ else{
 <?php
 }
 ?>
-<script src="chat.js"></script>
-<script src="projects.js"></script>
+<script src="scripts_JS/chat.js"></script>
+<script src="scripts_JS/projects.js"></script>
 </body>
 </html>
