@@ -9,6 +9,7 @@
 session_start();
 header('Content-Type: text/');
 
+//Connect to database
 require_once "databaseConn.php";
 $conn = connectToDatabase();
 
@@ -16,17 +17,15 @@ include "Project.php";
 
 $userId = $_SESSION['userId'];
 
-
 $projects = getProjects($conn, $userId);
 $returnString = buildReturnString($projects);
-
-
 echo $returnString;
 
 //=============================================//
 //              Functions below                //
 //=============================================//
 
+//This function returns an array of projects belonging to the given user.
 function getProjects($conn, $userId){
     $projects = [];
 
@@ -50,12 +49,13 @@ function getProjects($conn, $userId){
     return $projects;
 }
 
+//This function returns the html to be placed in the projects nav.
 function buildReturnString($projects){
 
     $string = "";
 
     foreach ($projects as $project) {
-        $string = $string . $project->buildHTMLMessage();
+        $string = $string . $project->buildHTML();
     };
 
     return $string;

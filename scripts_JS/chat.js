@@ -4,8 +4,10 @@ function chat_refreshChat(){
     chat_retrieveMessages();
 }
 
+//This function runs the chat_sendMessage.php AJAX script.
 function chat_sendMessage(passedMessageBody) {
 
+    //If there is a non-empty message sent.
     if(passedMessageBody.trim() !== "") {
         // Initialize the HTTP request.
         var xhr = new XMLHttpRequest();
@@ -19,6 +21,7 @@ function chat_sendMessage(passedMessageBody) {
             var OK = 200; // status 200 is a successful return.
             if (xhr.readyState === DONE) {
                 if (xhr.status === OK) {
+                    //If all went well, refresh the chat window
                     chat_refreshChat();
                 } else{
                     alert('Error: ' + xhr.status); // An error occurred during the request.
@@ -30,11 +33,12 @@ function chat_sendMessage(passedMessageBody) {
     }
 }
 
+//This function runs the chat_retrieveMessages.php AJAX script.
 function chat_retrieveMessages() {
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
     var phpPage = 'scripts_AJAX/chat_retrieveMessages.php';
-    var dateFrom = 'dateFrom=' + 'dateHere';
+    var dateFrom = 'dateFrom=' + 'dateHere'; //TODO: sort out dates
     var dateUpTo = 'dateUpTo=' + 'dateHere';
     xhr.open('get', phpPage +'?' + dateFrom + '&' + dateUpTo);
 
@@ -44,7 +48,7 @@ function chat_retrieveMessages() {
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
-                // alert("it worked");
+                //If all went well, change the chat window to the returned html
                 document.getElementById("chat").innerHTML = xhr.responseText; // 'This is the returned text.'
             } else {
                 alert('Error: ' + xhr.status); // An error occurred during the request.

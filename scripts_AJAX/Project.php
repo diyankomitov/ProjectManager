@@ -30,7 +30,8 @@ class Project {
 
     }
 
-    public function buildHTMLMessage(){
+    //This function returns the div for this project
+    public function buildHTML(){
         $id = $this->id;
         $string = "<div onclick='projects_openProject($id);'>
                         <hr>

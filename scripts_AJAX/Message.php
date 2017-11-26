@@ -24,7 +24,9 @@ class Message {
 
     }
 
-    public function buildHTMLMessage($userId){
+    //This function returns the chat bubble for this message.
+    //If the current user is not the creator of this message, it returns the correct type of bubble.
+    public function buildHTML($userId){
         $class = $this->creatorId === $userId ? "chatMessage myMessage" : "chatMessage otherMessage";
         $string = "
                     <div class='chatMessageWrapper'>

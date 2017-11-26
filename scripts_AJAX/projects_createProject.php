@@ -6,6 +6,7 @@
  * Time: 23:45
  */
 
+//Connect to database
 require_once "databaseConn.php";
 $conn = connectToDatabase();
 header('Content-Type: text/');
@@ -26,6 +27,8 @@ if($success) echo "Success";
 //              Functions below                //
 //=============================================//
 
+//This function finds the most recent project's id and returns that id + 1.
+//This is necessary because we need a reference to the new id to create the UserProject entry
 function getNewProjectId($conn){
 
     //Find the max id in projects. The new id is the max plus one.
@@ -40,8 +43,10 @@ function getNewProjectId($conn){
     return $newProjectId;
 }
 
+//Creates a new row in the Project table.
 function createProjectEntry($conn, $id, $class, $name, $description, $isComplete, $deadline){
 
+    //The query dependent on whether description and deadline are null or not.
     $sql = "";
     if($description === null && $deadline === null){
         $sql = "INSERT INTO `Project` (`id`, `class`, `name`, `is_complete`) 
@@ -66,6 +71,7 @@ function createProjectEntry($conn, $id, $class, $name, $description, $isComplete
 
 }
 
+//Creates a new row in the UserProject table.
 function createUserProjectEntries($conn, $userId, $projectId){
 
     $sql = "INSERT INTO `UserProject` (`user_id`, `project_id`, `is_read`) 

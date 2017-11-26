@@ -11,11 +11,13 @@
 session_start();
 header('Content-Type: text/');
 
+//Connect to database
 require_once "databaseConn.php";
 $conn = connectToDatabase();
 
 include "Message.php";
 
+//If the user has selected a project
 if(isset($_SESSION['projectId']) && !empty($_SESSION['projectId'])){
     $projectId = $_SESSION["projectId"];
     $userId = $_SESSION['userId'];
@@ -35,6 +37,7 @@ echo $returnString;
 //              Functions below                //
 //=============================================//
 
+//This function returns an array of messages in the given project. From and upto are not currently used.
 function getMessages($conn, $projectId, $from, $upTo){
     $messages = [];
 
@@ -56,12 +59,13 @@ function getMessages($conn, $projectId, $from, $upTo){
     return $messages;
 }
 
+//This function returns the html to be placed in the chat window.
 function buildReturnString($messages, $userId){
 
     $string = "";
 
     foreach ($messages as $message) {
-        $string = $string . $message->buildHTMLMessage($userId);
+        $string = $string . $message->buildHTML($userId);
     };
 
     return $string;

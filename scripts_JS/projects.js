@@ -1,3 +1,5 @@
+
+//This function runs the projects_retrieveProjects.php AJAX script.
 function projects_retrieveProjects() {
 
     // Initialize the HTTP request.
@@ -11,6 +13,7 @@ function projects_retrieveProjects() {
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
+                //If all went well, change the projects nav to the returned html
                 document.getElementById("projects").innerHTML = xhr.responseText; // 'This is the returned text.'
             } else {
                 alert('Error: ' + xhr.status); // An error occurred during the request.
@@ -21,6 +24,7 @@ function projects_retrieveProjects() {
     xhr.send(null);
 }
 
+//This function runs the projects_createProjects.php AJAX script.
 function projects_createProject() {
 
     // Initialize the HTTP request.
@@ -39,8 +43,8 @@ function projects_createProject() {
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
+                //If all went well, return to the main page
                 window.location.href = 'index.html';
-                // document.getElementById("error").innerHTML += xhr.responseText
             } else{
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }
@@ -50,6 +54,7 @@ function projects_createProject() {
     xhr.send(null);
 }
 
+//This function runs the projects_openProject.php AJAX script.
 function projects_openProject(projectId){
     var xhr = new XMLHttpRequest();
     var phpPage = 'scripts_AJAX/projects_setCurrentProject.php';
@@ -62,9 +67,8 @@ function projects_openProject(projectId){
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
+                //If all went well, refresh the chat so that the new project is shown
                 chat_refreshChat();
-                // alert(xhr.responseText);
-                 // document.getElementById("error").innerHTML += xhr.responseText
             } else{
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }

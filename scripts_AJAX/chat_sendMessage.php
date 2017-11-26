@@ -8,6 +8,7 @@
 session_start();
 header('Content-Type: text/');
 
+//Connect to database
 require_once "databaseConn.php";
 $conn = connectToDatabase();
 
@@ -23,6 +24,7 @@ createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageBody);
 //              Functions below                //
 //=============================================//
 
+//This function finds the most recent message's id and returns that id + 1.
 function getNewMessageId($conn){
 
     //Find the max id in messages. The new id is the max plus one.
@@ -37,6 +39,7 @@ function getNewMessageId($conn){
     return $newMessageId;
 }
 
+//Creates a new row in the Message table.
 function createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageBody){
     if(
         $conn->query("INSERT INTO `Message` (`id`, `creator_id`, `project_id`, `message_body`) 
