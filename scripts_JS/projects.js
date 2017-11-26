@@ -30,12 +30,11 @@ function projects_createProject() {
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
     var phpPage = 'scripts_AJAX/projects_createProject.php';
-    var user = 'user=2';
     var classs = 'class=' + document.getElementById("class").value;
     var project = 'name=' + document.getElementById("name").value;
     var description = 'description=' + document.getElementById("description").value;
     var deadline = 'deadline=' + document.getElementById("deadline").value;
-    xhr.open('get', phpPage + '?' + user + '&' + classs + '&' + project + '&' + description + '&' + deadline);
+    xhr.open('get', phpPage + '?' + classs + '&' + project + '&' + description + '&' + deadline);
 
     // Track the state changes of the request.
     xhr.onreadystatechange = function () {
@@ -43,8 +42,10 @@ function projects_createProject() {
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
-                //If all went well, return to the main page
-                window.location.href = 'index.html';
+                //If all went well, return to the main page and change to the newly created project.
+                window.location.href = 'index.php';
+                projects_openProject(xhr.responseText);
+                // alert(xhr.responseText);
             } else{
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }

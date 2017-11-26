@@ -5,23 +5,26 @@
  * Date: 18/11/2017
  * Time: 23:45
  */
+session_start();
 
 //Connect to database
 require_once "databaseConn.php";
 $conn = connectToDatabase();
 header('Content-Type: text/');
 
-$userId = $conn->real_escape_string($_GET["user"]);
+$userId = $_SESSION['userId'];
 $class = $conn->real_escape_string($_GET["class"]);
 $name = $conn->real_escape_string($_GET["name"]);
-$description =$conn->real_escape_string($_GET["description"]);
-$deadline = $conn->real_escape_string($_GET["deadline"]);
+$description = $_GET["description"] == "" ? null : $conn->real_escape_string($_GET["description"]);
+$deadline = $_GET["deadline"] == "" ? null : $conn->real_escape_string($_GET["deadline"]);
 
 $newProjectId = getNewProjectId($conn);
 $success = createProjectEntry($conn, $newProjectId, $class, $name, $description, 0, $deadline)
     && createUserProjectEntries($conn, $userId, $newProjectId);
 
-if($success) echo "Success";
+//if($success) echo $newProjectId;
+
+echo ($conn->error);
 
 //=============================================//
 //              Functions below                //
@@ -63,7 +66,7 @@ function createProjectEntry($conn, $id, $class, $name, $description, $isComplete
     }
 
     if($conn->query($sql) === FALSE) {
-        echo "ERROR at project:" . $conn->error;
+        echo "ERROR at project:" . $sql ;//$conn->error;
         return false;
     } else{
         return true;
