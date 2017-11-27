@@ -45,9 +45,9 @@ function buildReturnHTML($users){
         $name = $user->getName();
 
         if($id == $_SESSION['userId'])
-            $string = $string . "<div> $name  (That's You!)</div>";
+            $string = $string . "<div> $name (That's You!) <button type='button' onclick='projects_removeUserFromProject(1, $id);'>Leave</button></div>";
         else
-            $string = $string . "<div> $name <button onclick='projects_deleteUserFromProject($id, \"$name\");'>Remove</button></div>";
+            $string = $string . "<div> $name <button type='button' onclick='projects_removeUserFromProject(0, $id);'>Remove</button></div>";
     }
 
     return $string;

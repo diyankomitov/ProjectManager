@@ -47,7 +47,6 @@ class Project {
         $buttons ="<hr>
                         <p><input id='addUserText' type='text' />
                         <button onclick='projects_addUser(document.getElementById(\"addUserText\").value)'>Add User</button></p>
-                        <p><button onclick='projects_leaveProject()'>Delete Project</button> </p>
                    <hr>";
         $info = "<hr>
                  <p> Class : " . $this->class . "</p>

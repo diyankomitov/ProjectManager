@@ -69,7 +69,7 @@ function projects_openProject(projectId){
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
                 //If all went well, refresh the chat so that the new project is shown
-                chat_refreshChat();
+                chat_refreshPage();
             } else{
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }
@@ -160,7 +160,35 @@ function projects_addUser(email) {
     }
 }
 
-function projects_leaveProject() {
+function projects_removeUserFromProject(isLeaving, userId) {
+    // Initialize the HTTP request.
+    var xhr = new XMLHttpRequest();
+    var phpPage = 'scripts_AJAX/projects_removeUserFromProject.php';
+    var user = 'user=' + userId;
+    xhr.open('get', phpPage + '?' + user);
 
+    // Track the state changes of the request.
+    xhr.onreadystatechange = function () {
+        var DONE = 4; // readyState 4 means the request is done.
+        var OK = 200; // status 200 is a successful return.
+        if (xhr.readyState === DONE) {
+            if (xhr.status === OK) {
+                //If all went well...
+                if(isLeaving){
+                    //If user is leaving group,
+                    chat_refreshPage();// Refresh the page
+                } else {
+                    //If user is not leaving group (ie is removing another user), just refresh the page.
+                    chat_refreshPage();
+                }
+                projects_retrieveProjectInfo();
+                document.getElementById('info_error').innerHTML = xhr.responseText;
+            } else {
+                alert('Error: ' + xhr.status); // An error occurred during the request.
+            }
+        }
+    };
+    // Send the request to send-ajax-data.php
+    xhr.send(null);
 }
 

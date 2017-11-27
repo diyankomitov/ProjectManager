@@ -16,13 +16,38 @@ $projectId = $_SESSION['selectedProjectId'];
 $userId = $_SESSION['userId'];
 $messageBody = $conn->real_escape_string($_GET["messageBody"]);
 
-$newMessageId = getNewMessageId($conn);
-createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageBody);
+$response = userNotInProject($conn, $userId, $projectId);
+if($response == "") { // If there is no response then the user is in the project, so continue.
+    $newMessageId = getNewMessageId($conn);
+    createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageBody);
 // createReceivedMessageEntries($conn, $userId, $newMessageId, $projectId);
+}
+
+echo $response;
+
 
 //=============================================//
 //              Functions below                //
 //=============================================//
+
+function userNotInProject($conn, $userId, $projectId){
+    $result = $conn->query("SELECT `*` 
+                            FROM `UserProject` 
+                            WHERE `user_id` = $userId 
+                            AND `project_id` = $projectId");
+
+    if($result === FALSE){
+        return $conn->error;
+    } else if($result->num_rows < 1){
+        return "You are no longer part of this project.";
+    } else if($result->num_rows > 1){
+        return "ERROR at chat_sendMessage.php :: userNotInProject(): Multiple instances of user and project in UserProject.";
+    } else {
+        return "";
+    }
+
+    return "AHHHHHHHHHHHH";
+}
 
 //This function finds the most recent message's id and returns that id + 1.
 function getNewMessageId($conn){

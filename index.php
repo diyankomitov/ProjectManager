@@ -28,7 +28,7 @@ $setName = $row['name'];
     <title>Project Manager</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-//        setInterval(function(){chat_refreshChat()}, 5000);
+        setInterval(function(){chat_refreshPage()}, 3000);
     </script>
 </head>
 <body>
@@ -54,14 +54,14 @@ $setName = $row['name'];
             There are no messages.
         </div>
 
-        <div class="chatInput">
+        <div id="chatInput" class="chatInput">
             <textarea id="textArea" class="message"></textarea>
             <button type="button"
                     class="submitMessage"
                     onclick="chat_sendMessage(document.getElementById('textArea').value);">
                         Send
             </button>
-            <button type="button" onclick="chat_refreshChat();">Refresh</button>
+            <button type="button" onclick="chat_refreshPage();">Refresh</button>
         </div>
     </main>
     <aside>
