@@ -69,7 +69,7 @@ function projects_openProject(projectId){
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
                 //If all went well, refresh the chat so that the new project is shown
-                chat_refreshPage();
+                chat_refreshPage(true, true);
             } else{
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }
@@ -80,7 +80,7 @@ function projects_openProject(projectId){
 }
 
 //This function runs the projects_retrieveProjectInfo.php AJAX script.
-function projects_retrieveProjectInfo(){
+function projects_retrieveProjectInfo(refreshButtons){
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
     var phpPage = 'scripts_AJAX/projects_retrieveProjectInfo.php';
@@ -94,7 +94,7 @@ function projects_retrieveProjectInfo(){
             if (xhr.status === OK) {
                 //If all went well, set the aside to the returned html
                 var infoArray = JSON.parse(xhr.responseText);
-                document.getElementById("info_buttons").innerHTML = infoArray[0];
+                if(refreshButtons) document.getElementById("info_buttons").innerHTML = infoArray[0];
                 projects_getUsersInProject();
                 document.getElementById("info_info").innerHTML = infoArray[1];
             } else {
@@ -148,7 +148,7 @@ function projects_addUser(email) {
             if (xhr.readyState === DONE) {
                 if (xhr.status === OK) {
                     //If all went well, retrieve the projectInfo
-                    projects_retrieveProjectInfo();
+                    projects_retrieveProjectInfo(true);
                     document.getElementById('info_error').innerHTML = xhr.responseText;
                 } else {
                     alert('Error: ' + xhr.status); // An error occurred during the request.
@@ -176,12 +176,12 @@ function projects_removeUserFromProject(isLeaving, userId) {
                 //If all went well...
                 if(isLeaving){
                     //If user is leaving group,
-                    chat_refreshPage();// Refresh the page
+                    chat_refreshPage(false, false);// Refresh the page
                 } else {
                     //If user is not leaving group (ie is removing another user), just refresh the page.
-                    chat_refreshPage();
+                    chat_refreshPage(false, false);
                 }
-                projects_retrieveProjectInfo();
+                projects_retrieveProjectInfo(false);
                 document.getElementById('info_error').innerHTML = xhr.responseText;
             } else {
                 alert('Error: ' + xhr.status); // An error occurred during the request.

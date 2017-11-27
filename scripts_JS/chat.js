@@ -1,10 +1,13 @@
 
 
-function chat_refreshPage(){
+function chat_refreshPage(setChatTextAreaBlank, refreshAddUserForm){
+
     chat_retrieveMessages();
     projects_retrieveProjects();
-    projects_retrieveProjectInfo();
-    document.getElementById("textArea").value = "";
+    projects_retrieveProjectInfo(refreshAddUserForm);
+
+    if(setChatTextAreaBlank)
+        document.getElementById("textArea").value = "";
 }
 
 //This function runs the chat_sendMessage.php AJAX script.
@@ -25,7 +28,7 @@ function chat_sendMessage(passedMessageBody) {
             if (xhr.readyState === DONE) {
                 if (xhr.status === OK) {
                     //If all went well, refresh the chat window
-                    chat_refreshPage();
+                    chat_refreshPage(true, false);
                     document.getElementById("textArea").value = xhr.responseText;
                 } else{
                     alert('Error: ' + xhr.status); // An error occurred during the request.

@@ -28,7 +28,7 @@ $setName = $row['name'];
     <title>Project Manager</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        setInterval(function(){chat_refreshPage()}, 3000);
+        setInterval(function(){chat_refreshPage(false, false);}, 3000);
     </script>
 </head>
 <body>
@@ -61,7 +61,7 @@ $setName = $row['name'];
                     onclick="chat_sendMessage(document.getElementById('textArea').value);">
                         Send
             </button>
-            <button type="button" onclick="chat_refreshPage();">Refresh</button>
+            <button type="button" onclick="chat_refreshPage(false, false);">Refresh</button>
         </div>
     </main>
     <aside>
@@ -80,7 +80,9 @@ $setName = $row['name'];
     </aside>
     <footer>FOOTER</footer>
 </div>
-
+<script src="scripts_JS/chat.js"></script>
+<script src="scripts_JS/projects.js"></script>
+<script>chat_refreshPage(true, true);</script>
 <?php
 
 
@@ -116,10 +118,10 @@ else{
     <aside>FILES</aside>
     <footer>FOOTER</footer>
 </div>
+<script src="scripts_JS/chat.js"></script>
+<script src="scripts_JS/projects.js"></script>
 <?php
 }
 ?>
-<script src="scripts_JS/chat.js"></script>
-<script src="scripts_JS/projects.js"></script>
 </body>
 </html>
