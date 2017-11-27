@@ -20,7 +20,6 @@ $response = userNotInProject($conn, $userId, $projectId);
 if($response == "") { // If there is no response then the user is in the project, so continue.
     $newMessageId = getNewMessageId($conn);
     createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageBody);
-// createReceivedMessageEntries($conn, $userId, $newMessageId, $projectId);
 }
 
 echo $response;
@@ -72,33 +71,4 @@ function createMessageEntry($conn, $newMessageId, $userId, $projectId, $messageB
         === FALSE) {
         echo $conn->error;
     }
-}
-
-function createReceivedMessageEntries($conn, $currentUserId, $newMessageId, $projectID){
-
-    //Get all OTHER userIds in project
-    $otherUserIds = [];
-    $result = $conn->query("SELECT `user_id` FROM `UserProject` WHERE `project_id` = '$projectID'");
-    if($result->num_rows  > 0) {
-        while ($row = $result->fetch_array()){
-            if($row[0] != $currentUserId)
-                array_push($otherUserIds, $row[0]);
-        }
-    } else {
-        echo "CONN ERROR: " . $conn->error;
-    }
-
-    if(empty($otherUserIds)){
-        echo "------------ERROR: userIds is empty in createReceivedMessageEntries ----------------";
-    }
-
-    //Loop through each userId and insert a row into ReceivedMessage
-    foreach ($otherUserIds as $otherUserId) {
-        $conn->query("INSERT INTO `ReceivedMessage` (`id`, `recipient_id`, `project_id`, `message_id`, `is_read`) 
-                      VALUES (NULL, '$otherUserId', '$projectID', '$newMessageId', '0')");
-        if($conn->error){
-            echo $conn->error;
-        }
-    }
-
 }
