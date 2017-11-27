@@ -13,17 +13,17 @@ class Project {
     var $name;
     var $description;
     var $createDate;
-    var $deadline;
     var $isComplete;
+    var $deadline;
 
-    public function __construct($id, $class, $name, $description, $createDateString, $deadline, $isComplete){
+    public function __construct($id, $class, $name, $description, $createDateString, $isComplete, $deadline){
         $this->id = $id;
         $this->class = $class;
         $this->name = $name;
         $this->description = $description;
         $this->createDate = $this->dateStringToDate($createDateString);
-        $this->deadline = $deadline;
         $this->isComplete= $isComplete;
+        $this->deadline = $deadline;
     }
 
     private function dateStringToDate($createDateString){

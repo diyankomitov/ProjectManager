@@ -95,8 +95,8 @@ function projects_retrieveProjectInfo(refreshButtons){
                 //If all went well, set the aside to the returned html
                 var infoArray = JSON.parse(xhr.responseText);
                 if(refreshButtons) document.getElementById("info_buttons").innerHTML = infoArray[0];
-                projects_getUsersInProject();
                 document.getElementById("info_info").innerHTML = infoArray[1];
+                projects_getUsersInProject();
             } else {
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }
