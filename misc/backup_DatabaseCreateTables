@@ -27,17 +27,6 @@ ALTER  TABLE `cs312_h`.`Project` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 
 
-CREATE TABLE `cs312_h`.`ReceivedMessage` (
-  `id` int(11) NOT NULL,
-  `recipient_id` int(11) NOT NULL,
-  `project_id` int(11) NOT NULL,
-  `message_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-ALTER  TABLE `cs312_h`.`ReceivedMessage` ADD PRIMARY KEY (`id`);
-ALTER  TABLE `cs312_h`.`ReceivedMessage` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-
-
 CREATE TABLE `cs312_h`.`User` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
