@@ -55,8 +55,10 @@ function chat_retrieveMessages() {
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
-                //If all went well, change the chat window to the returned html
-                document.getElementById("chat").innerHTML = xhr.responseText; // 'This is the returned text.'
+                //If all went well, change the chat window to the returned html and scroll down.
+                var chatDiv = document.getElementById("chat");
+                chatDiv.innerHTML = xhr.responseText; // 'This is the returned text.'
+                chatDiv.scrollTop = chatDiv.scrollHeight;
             } else {
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }
