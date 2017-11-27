@@ -160,7 +160,7 @@ function projects_addUser(email) {
     }
 }
 
-function projects_removeUserFromProject(isLeaving, userId) {
+function projects_removeUserFromProject(userId) {
     // Initialize the HTTP request.
     var xhr = new XMLHttpRequest();
     var phpPage = 'scripts_AJAX/projects_removeUserFromProject.php';
@@ -173,16 +173,8 @@ function projects_removeUserFromProject(isLeaving, userId) {
         var OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
-                //If all went well...
-                if(isLeaving){
-                    //If user is leaving group,
-                    chat_refreshPage(false, false);// Refresh the page
-                } else {
-                    //If user is not leaving group (ie is removing another user), just refresh the page.
-                    chat_refreshPage(false, false);
-                }
-                projects_retrieveProjectInfo(false);
-                document.getElementById('info_error').innerHTML = xhr.responseText;
+                //If all went well, refresh the page
+                chat_refreshPage(false, false);
             } else {
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }
