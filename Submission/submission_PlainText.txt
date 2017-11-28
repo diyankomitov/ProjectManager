@@ -1,0 +1,29 @@
+Site name:
+Project Efficiency
+
+Team members:
+Ewan Brown
+Diyan Komitov
+Jamie Hutchison
+Kelvin Skyrme
+
+Overview:
+The site is a group based real-time chat site that allows students to discuss class projects. A user can log on, create a project, add other users to the project and send messages in to the chat. The other users in the chat will then receive those messages when they log on.
+
+Good points:
+- Site supports multiple-user communication.
+- Site allows for users to communicate with others in different chat rooms. 
+- Site uses conventions seen in similar applications, so the way most features are intended to be used are ‘guessable’.
+- Site auto-updates with new data so users do not need to refresh the page.
+- All input is secured against SQL/JS injection.
+- Site looks professional and user-friendly.
+Weak points:
+- There are longer page load times when message chains are very long since the ‘unlimited scrolling’ is not implemented.
+- The site polls the database every 3 seconds and requests a lot of data.
+- Some of the code could have been automated using SQL Triggers and other constraints.
+
+URL:
+https://devweb2017.cis.strath.ac.uk/~isb15155/cs312_group_project/
+
+Statement:
+This submission is entirely the work of our group. No code has been copied from classmates or from internet sources.
