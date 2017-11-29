@@ -2,8 +2,8 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     session_start();
 
-    include_once 'databaseConn.php';
-    $conn = connectToDatabase();
+include_once 'scripts_AJAX/databaseConn.php';
+$conn = connectToDatabase();
 
     function sanitizeValues($conn, $value){
         if(isset($_POST[$value])){
@@ -16,6 +16,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = sanitizeValues($conn, "email");
     $password = sanitizeValues($conn, "password");
 
+
+//=======
+function getUserId($conn, $email){
+    $result = $conn->query("SELECT `id` FROM `User` WHERE `email` = '$email';");
+
+    if($conn->error) {
+        $_SESSION['error'] += "<p>Conn error: $conn->error</p>";
+    } else if($result->num_rows === 0) {
+        $_SESSION['error'] += "<p>getUserId() - num of rows = 0</p>";
+    } else if ($result->num_rows > 1) {
+        $_SESSION['error'] += "<p>getUserId() - num of rows > 1</p>";
+    } else {
+        return $result->fetch_array()[0];
+    }
+
+    return -1;
+
+}
+//>>>>>>> registrationAndLogin
+
     $sql = "SELECT `pass` FROM `User` WHERE `email` = '$email'";
     $result = $conn->query($sql);
 
@@ -26,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($rows == 1 && password_verify($password, $passHash)){
         $_SESSION['email'] = $email;
+        $_SESSION['userId'] = getUserId($conn, $email);
         echo "";
     }
     else{

@@ -3,7 +3,7 @@ session_start();
 
 if(!isset($_SESSION['email'])!="" ){
 
-    include_once 'databaseConn.php';
+    include_once 'scripts_AJAX/databaseConn.php';
     $conn = connectToDatabase();
 
     function sanitizeValues($conn, $value){
@@ -37,6 +37,7 @@ if(!isset($_SESSION['email'])!="" ){
         $hashedAndSaltedPassword = password_hash($password, PASSWORD_BCRYPT);
 
         $sql = "INSERT INTO `User` (`email`, `pass`, `name`, `uni`, `course`) VALUES ('$email', '$hashedAndSaltedPassword', '$name', '$uni', '$course')";
+
         $result = $conn->query($sql);
         echo "";
     }
@@ -45,7 +46,7 @@ if(!isset($_SESSION['email'])!="" ){
         <label id="nameLabel" for="name">Full Name <sup>(Required)</sup></label>
         <input type="text"  id="name" name="name" value="<?php echo $name ?>" required>
 
-        <label id="emailLabel" for="Email">Email Address <sup>(Required)</sup></label>
+        <label id="emailLabel" for="email">Email Address <sup>(Required)</sup></label>
         <input type="email" id="email" name="email" value="<?php echo $email ?>" required>
 
         <label id="passLabel" for="password">Password <sup>(Required)</sup></label>

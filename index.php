@@ -2,9 +2,10 @@
 
 session_start();
 
-include_once 'databaseConn.php';
+include_once 'scripts_AJAX/databaseConn.php';
 $conn = connectToDatabase();
 
+//<<<<<<< HEAD
 if (!isset($_SESSION["email"])) {
     header('Location: login.html');
 }
@@ -16,6 +17,7 @@ else {
     $name = $row['name'];
 
 ?>
+<!--<<<<<<< HEAD-->
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -34,7 +36,13 @@ else {
             </div>
         </header>
         <nav id="projects">
-            There are no projects.
+            <div>
+                <button type="button" onclick=" projects_retrieveProjects();">Refresh</button>
+                <button type="button" onclick="window.location.href = ' createProject.html';">Create</button>
+            </div>
+<!--            <div id="projects">-->
+<!--                There are no projects.-->
+<!--            </div>-->
         </nav>
         <main>
             <div class="chatWrapper">
@@ -52,7 +60,20 @@ else {
                 <span class="afterSubmit"></span>
             </div>
         </main>
-        <aside>FILES</aside>
+        <aside>
+            <div id="projectInfo">
+                <div id='info_buttons'>
+                </div>
+                <div id="info_error">
+                </div>
+                <div id='info_info'>
+                </div>
+                <div id='info_users'>
+                </div>
+            </div>
+            <div id="error"></div>
+            <!--        --><?php //echo "<p> ". $_SESSION['userId'] . "</p><p>" . $_SESSION["error"] ."</p>" ?><!-- -->
+        </aside>
         <footer>Created by Group H for CS312</footer>
     </div>
 

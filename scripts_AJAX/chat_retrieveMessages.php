@@ -8,23 +8,28 @@
  * Date: 14/11/2017
  * Time: 14:26
  */
-
+session_start();
 header('Content-Type: text/');
 
+//Connect to database
 require_once "databaseConn.php";
 $conn = connectToDatabase();
 
 include "Message.php";
 
-$projectId = $_GET["project"];
-$userId = $_GET["user"];
-$dateFrom = $_GET["dateFrom"];
-$dateUpTo = $_GET["dateUpTo"];
+//If the user has selected a project
+if(isset($_SESSION['selectedProjectId']) && !empty($_SESSION['selectedProjectId'])){
+    $projectId = $_SESSION["selectedProjectId"];
+    $userId = $_SESSION['userId'];
+    $dateFrom = $_GET["dateFrom"];
+    $dateUpTo = $_GET["dateUpTo"];
 
+    $messages = getMessages($conn, $projectId, $dateFrom, $dateUpTo);
+    $returnString = buildReturnString($messages, $userId);
 
-$messages = getMessages($conn, $projectId, $dateFrom, $dateUpTo);
-$returnString = buildReturnString($messages, $userId);
-
+}else {
+    $returnString = "<p>Click or create a project</p>";
+}
 
 echo $returnString;
 
@@ -32,6 +37,7 @@ echo $returnString;
 //              Functions below                //
 //=============================================//
 
+//This function returns an array of messages in the given project. From and upto are not currently used.
 function getMessages($conn, $projectId, $from, $upTo){
     $messages = [];
 
@@ -53,12 +59,13 @@ function getMessages($conn, $projectId, $from, $upTo){
     return $messages;
 }
 
+//This function returns the html to be placed in the chat window.
 function buildReturnString($messages, $userId){
 
     $string = "";
 
     foreach ($messages as $message) {
-        $string = $string . $message->buildHTMLMessage($userId);
+        $string = $string . $message->buildHTML($userId);
     };
 
     return $string;
