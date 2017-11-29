@@ -42,6 +42,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     else if( !filter_var($email,FILTER_VALIDATE_EMAIL)) {
         $emailError = "* Please enter a valid email address";
         $error = true;
+    } else if (emailIsUnique($conn, $email) == false) {
+        $emailError = "* That email is already registered";
+        $error = true;
     }
 
     if (empty($name)) {
@@ -61,6 +64,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $conn->query($sql);
         $successful = "Registration successful you may now login";
 
+    }
+}
+
+function emailIsUnique($conn, $email){
+    $result = $conn->query("SELECT `*` FROM `User` WHERE `email` = '$email'");
+
+    if($result === FALSE){
+        //ERROR HERE
+    } else if($result->num_rows > 0){
+        return false;
+    } else {
+        return true;
     }
 }
 
