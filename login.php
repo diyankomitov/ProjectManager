@@ -17,7 +17,6 @@ $conn = connectToDatabase();
     $password = sanitizeValues($conn, "password");
 
 
-//=======
 function getUserId($conn, $email){
     $result = $conn->query("SELECT `id` FROM `User` WHERE `email` = '$email';");
 
@@ -34,7 +33,7 @@ function getUserId($conn, $email){
     return -1;
 
 }
-//>>>>>>> registrationAndLogin
+
 
     $sql = "SELECT `pass` FROM `User` WHERE `email` = '$email'";
     $result = $conn->query($sql);

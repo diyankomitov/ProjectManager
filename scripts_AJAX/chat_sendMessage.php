@@ -14,7 +14,7 @@ $conn = connectToDatabase();
 
 $projectId = $_SESSION['selectedProjectId'];
 $userId = $_SESSION['userId'];
-$messageBody = $conn->real_escape_string($_GET["messageBody"]);
+$messageBody = $conn->real_escape_string($_POST["messageBody"]);
 
 $response = userNotInProject($conn, $userId, $projectId);
 if($response == "") { // If there is no response then the user is in the project, so continue.

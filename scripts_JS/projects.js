@@ -26,33 +26,42 @@ function projects_retrieveProjects() {
 
 //This function runs the projects_createProjects.php AJAX script.
 function projects_createProject() {
+    var form = document.getElementById("createProjectForm");
+    if(form.checkValidity() === true) {
+        form.onsubmit = function (e) {
+            // alert("preventing submit");
+            e.preventDefault();
+        };
+        // Initialize the HTTP request.
+        var xhr = new XMLHttpRequest();
+        var phpPage = 'scripts_AJAX/projects_createProject.php';
+        var classs = "class=" + document.getElementById("class").value;
+        var project = "name=" + document.getElementById("name").value;
+        var description = "description=" + document.getElementById("description").value;
+        var deadline = "deadline=" + document.getElementById("deadline").value;
+        xhr.open('POST', phpPage, true);
+        // alert(classs + '&' + project + '&' + description + '&' + deadline);
 
-    // Initialize the HTTP request.
-    var xhr = new XMLHttpRequest();
-    var phpPage = 'scripts_AJAX/projects_createProject.php';
-    var classs = 'class=' + document.getElementById("class").value;
-    var project = 'name=' + document.getElementById("name").value;
-    var description = 'description=' + document.getElementById("description").value;
-    var deadline = 'deadline=' + document.getElementById("deadline").value;
-    xhr.open('get', phpPage + '?' + classs + '&' + project + '&' + description + '&' + deadline);
-
-    // Track the state changes of the request.
-    xhr.onreadystatechange = function () {
-        var DONE = 4; // readyState 4 means the request is done.
-        var OK = 200; // status 200 is a successful return.
-        if (xhr.readyState === DONE) {
-            if (xhr.status === OK) {
-                //If all went well, return to the main page and change to the newly created project.
-                window.location.href = 'index.php';
-                projects_openProject(xhr.responseText);
-                // alert(xhr.responseText);
-            } else{
-                alert('Error: ' + xhr.status); // An error occurred during the request.
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // Track the state changes of the request.
+        xhr.onreadystatechange = function () {
+            var DONE = 4; // readyState 4 means the request is done.
+            var OK = 200; // status 200 is a successful return.
+            if (xhr.readyState === DONE) {
+                if (xhr.status === OK) {
+                    // If all went well, return to the main page and change to the newly created project.
+                    location.hash = "#";
+                    projects_openProject(xhr.responseText);
+                    // alert(xhr.responseText)
+                } else{
+                    alert('Error: ' + xhr.status); // An error occurred during the request.
+                }
             }
-        }
-    };
-    // Send the request to send-ajax-data.php
-    xhr.send(null);
+        };
+        // Send the request to send-ajax-data.php
+        xhr.send(classs + "&" + project + "&" + description + "&" + deadline);
+    }
+
 }
 
 //This function runs the projects_openProject.php AJAX script.
@@ -120,7 +129,7 @@ function projects_getUsersInProject() {
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
                 //If all went well, return the response html
-                document.getElementById("info_users").innerHTML = "<hr> " + xhr.responseText + "<hr>";
+                document.getElementById("info_users").innerHTML = xhr.responseText;
             } else {
                 alert('Error: ' + xhr.status); // An error occurred during the request.
             }

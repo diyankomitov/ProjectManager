@@ -42,17 +42,17 @@ function buildReturnHTML($users){
 
     foreach ($users as $user){
         $id = $user->getId();
-        $name = $user->getName();
-        $buttonHTML = "<button type='button' onclick='projects_removeUserFromProject($id);'>";
+        $name = "<span class='projectUserLabel'>" . $user->getName();
+        $buttonHTML = "<a onclick='projects_removeUserFromProject($id);'>";
 
         if($id == $_SESSION['userId']){
-            $name = $name . " (That's You!)";
-            $buttonHTML = $buttonHTML . "Leave</button>";
+            $name = $name . " (That's You!)</span>";
+            $buttonHTML = $buttonHTML . "&times</a>";
         } else {
-            $buttonHTML = $buttonHTML . "Remove</button>";
+            $buttonHTML = $buttonHTML . "&times</a>";
         }
 
-        $string = $string . "<div> $name $buttonHTML </div>";
+        $string = $string . "<div class='projectUser'> $name $buttonHTML </div>";
     }
 
     return $string;

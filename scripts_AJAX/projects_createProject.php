@@ -13,16 +13,28 @@ $conn = connectToDatabase();
 header('Content-Type: text/');
 
 $userId = $_SESSION['userId'];
-$class = $conn->real_escape_string($_GET["class"]);
-$name = $conn->real_escape_string($_GET["name"]);
-$description = $_GET["description"] == "" ? null : $conn->real_escape_string($_GET["description"]);
-$deadline = $_GET["deadline"] == "" ? null : $conn->real_escape_string($_GET["deadline"]);
+
+
+function sanitizeValues($conn, $value){
+    if(isset($_POST[$value])){
+        return $conn->real_escape_string($_POST[$value]);
+    } else {
+        return "";
+    }
+}
+
+
+$class = sanitizeValues($conn,"class");
+$name = sanitizeValues($conn,"name");
+$description = sanitizeValues($conn,"description") === "" ? null : sanitizeValues($conn,"description");
+$deadline = sanitizeValues($conn,"deadline") === "" ? null : sanitizeValues($conn,"deadline");
+
 
 $newProjectId = getNewProjectId($conn);
 $success = createProjectEntry($conn, $newProjectId, $class, $name, $description, 0, $deadline)
     && createUserProjectEntries($conn, $userId, $newProjectId);
 
-//if($success) echo $newProjectId;
+if($success) echo $newProjectId;
 
 echo ($conn->error);
 

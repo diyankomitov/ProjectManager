@@ -16,7 +16,7 @@ class Message {
     public function __construct($id, $creatorId, $messageBody, $createDateString){
         $this->id = $id;
         $this->creatorId = $creatorId;
-        $this->messageBody = htmlspecialchars($messageBody);
+        $this->messageBody = nl2br(wordwrap(htmlentities($messageBody),30, "\n", true));
         $this->createDate = $this->dateStringToDate($createDateString);
     }
 

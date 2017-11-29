@@ -19,8 +19,10 @@ function chat_sendMessage(passedMessageBody) {
         var xhr = new XMLHttpRequest();
         var phpPage = 'scripts_AJAX/chat_sendMessage.php';
         var messageBody = 'messageBody=' + passedMessageBody;
-        xhr.open('get', phpPage + '?' + messageBody);
 
+        xhr.open('POST', phpPage, true);
+
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         // Track the state changes of the request.
         xhr.onreadystatechange = function () {
             var DONE = 4; // readyState 4 means the request is done.
@@ -36,7 +38,7 @@ function chat_sendMessage(passedMessageBody) {
             }
         };
         // Send the request to send-ajax-data.php
-        xhr.send(null);
+        xhr.send(messageBody);
     }
 }
 

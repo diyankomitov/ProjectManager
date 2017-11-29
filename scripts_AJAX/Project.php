@@ -47,27 +47,26 @@ class Project {
     //This function returns the div for this project
     public function buildNavHTML(){
         $id = $this->id;
-        $string = "<div name='$id' onclick='projects_openProject($id);'>
-                        <hr>
-                        <p>$this->class : $this->name</p>
-                        <hr>
-                    </div>";
+        $string = "<div onclick='projects_openProject($id)'>
+                       <div class=\"projectClass\">
+                           <h2>$this->class</h2>
+                       </div>
+                       <div class=\"projectName\">
+                           <p>$this->name</p>
+                       </div>
+                   </div>";
         return $string;
     }
 
     public function buildInfoHTML(){
         $id = $this->id;
 
-        $buttons ="<hr>
-                        <p><input id='addUserText' type='text' />
-                        <button onclick='projects_addUser(document.getElementById(\"addUserText\").value)'>Add User</button></p>
-                   <hr>";
-        $info = "<hr>
-                 <p> Class : " . $this->class . "</p>
+        $buttons ="<input id='addUserText' type='text' />
+                   <button onclick='projects_addUser(document.getElementById(\"addUserText\").value)'>Add User</button>";
+        $info = "<p> Class : " . $this->class . "</p>
                  <p> Project Name : " . $this->name . "</p>
                  <p> Description : " . $this->description . "</p>
-                 <p> Deadline : " . $this->deadline . "</p>
-                 <hr>";
+                 <p> Deadline : " . $this->deadline . "</p>";
 
         return [ $buttons, $info ];
     }

@@ -24,7 +24,7 @@ function register() {
             if (xhr.readyState === DONE) {
                 if (xhr.status === OK) {
                     if(xhr.responseText.trim() === "") {
-                        window.location.href = "login.html?registered=true"
+                        window.location.href = "login.html"
                     }
                     else {
                         document.getElementById("registerForm").innerHTML = xhr.responseText; // 'This is the returned text.'
