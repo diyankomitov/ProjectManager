@@ -1,5 +1,4 @@
 
-
 <?php
 
 session_start();
@@ -58,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$error) {
 
-        $sql = "INSERT INTO `User` (`id`, `email`, `pass`, `name`, `uni`, `course`, `profile_pic_path`) VALUES (NULL,'$email', '$pass', '$name', '$uni', $course, NULL)";
+        $sql = "INSERT INTO `User` (`id`, `email`, `pass`, `name`, `uni`, `course`, `profile_pic_path`) VALUES (NULL,'$email', '$pass', '$name', '$uni', '$course', NULL)";
         $result = $conn->query($sql);
         $successful = "Registration successful you may now login";
 
